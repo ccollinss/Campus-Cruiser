@@ -1,5 +1,5 @@
 CREATE TABLE Students (
-    student_id INT PRIMARY KEY
+    student_id INT PRIMARY KEY AUTO_INCREMENT,
     student_name VARCHAR(50) NOT NULL,
     date_of_birth DATE NOT NULL,
     student_email VARCHAR(100) NOT NULL,
@@ -8,14 +8,14 @@ CREATE TABLE Students (
     student_license CHAR(20) UNIQUE,
     student_insurance VARCHAR(50),
     emergency_contact VARCHAR(50),
-    emergency_contact_phone VARCHAR(20)
+    emergency_contact_phone VARCHAR(20),
     registration date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
     FOREIGN KEY () REFERENCES ()
 );
 
 CREATE TABLE Events (
-    event_id INT PRIMARY KEY,
+    event_id INT PRIMARY KEY AUTO_INCREMENT,
     event_name VARCHAR(100) NOT NULL,
     event_date DATE NOT NULL,
     event_time TIME NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE Events (
 );
 
 CREATE TABLE Vehicles (
-    vehicle_id INT PRIMARY KEY,
+    vehicle_id INT PRIMARY KEY AUTO_INCREMENT,
     vehicle_make VARCHAR(50) NOT NULL,
     vehicle_model VARCHAR(50) NOT NULL,
     vehicle_year INT(4),
@@ -37,7 +37,7 @@ CREATE TABLE Vehicles (
 );
 
 CREATE TABLE Drivers (
-    driver_id INT PRIMARY KEY,
+    driver_id INT PRIMARY KEY AUTO_INCREMENT,
     driver_name VARCHAR(50) NOT NULL,
     driver_phone VARCHAR(20) NOT NULL,
     driver_email VARCHAR(100) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE Drivers (
 );
 
 CREATE TABLE Payments (
-    payment_id INT PRIMARY KEY,
+    payment_id INT PRIMARY KEY AUTO_INCREMENT,
     student_id INT,
     amount DECIMAL(10,2) NOT NULL,
     payment_method VARCHAR(50) CHECK (payment_method IN ('Credit Card', 'Debit Card', 'PayPal', 'Apple Pay', 'Google Pay')),
@@ -63,7 +63,7 @@ CREATE TABLE Payments (
 );
 
 CREATE TABLE Bookings (
-    booking_id INT PRIMARY KEY,
+    booking_id INT PRIMARY KEY AUTO_INCREMENT,
     student_id INT,
     driver_id INT,
     vehicle_id INT,
@@ -81,7 +81,7 @@ CREATE TABLE Bookings (
 );
 
 CREATE TABLE Create_Event (
-    create_event_id INT PRIMARY KEY,
+    create_event_id INT PRIMARY KEY AUTO_INCREMENT,
     student_id INT,
     event_id INT,
     role VARCHAR(50) CHECK (role IN ('Student', 'Organizer', 'Volunteer')),
@@ -92,7 +92,7 @@ CREATE TABLE Create_Event (
 );
 
 CREATE TABLE Ride_Groups (
-    ride_group_id INT PRIMARY KEY,
+    ride_group_id INT PRIMARY KEY AUTO_INCREMENT,
     group_size INT CHECK (group_size >= 4) NOT NULL,
     group_name VARCHAR(100) NOT NULL,
     group_description TEXT,
