@@ -1,5 +1,5 @@
 INSERT INTO Students (student_id, student_name, date_of_birth, student_email, student_address, phone_number, drivers_license, student_insurance, emergency_contact, emergency_contact_phone) VALUES
-(1, 'Cameeron Collins', '2005-11-09', 'cmcollins2005@gmail.com', '6215 Pink St, Colorsville', '555-1234', 'D1234567', 'HealthPlus', 'Jane Collins', '410-567-3538'),
+(1, 'Cameron Collins', '2005-11-09', 'cmcollins2005@gmail.com', '6215 Pink St, Colorsville', '555-1234', 'D1234567', 'HealthPlus', 'Jane Collins', '410-567-3538'),
 (2, 'Ava Johnson', '2004-05-14', 'ajohnson14@gmail.com', '456 Oak St, Townsville', '555-2345', 'D2345678', 'MediCare', 'John Johnson', '667-274-6789'),
 (3, 'Liam Smith', '2005-08-22', 'thesmiths@gmail.com', '789 Pine St, Villageville', '555-3456', 'D3456789', 'HealthFirst', 'Mary Smith', '294-219-7890'),
 (4, 'Sophia Brown', '2004-12-30', 'sbrown30@gmail.com', '321 Maple St, Hamletville', '555-4567', 'D4567890', 'WellCare', 'James Brown', '911-592-8901'),
