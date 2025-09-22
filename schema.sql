@@ -93,6 +93,7 @@ CREATE TABLE Create_Event (
 
 CREATE TABLE Ride_Groups (
     ride_group_id INT PRIMARY KEY,
+    group_size INT CHECK (group_size >= 4) NOT NULL,
     group_name VARCHAR(100) NOT NULL,
     group_description TEXT,
     created_by INT,
