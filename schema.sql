@@ -44,7 +44,8 @@ CREATE TABLE Drivers (
     driver_licence VARCHAR(20) UNIQUE NOT NULL,
     driver_rating DECIMAL(2,1) CHECK (driver_rating BETWEEN 1.0 AND 5.0)
     driver_availability BOOLEAN DEFAULT TRUE
-
+    driver_age INT(2) CHECK (driver_age >= 18) NOT NULL
+    
     FOREIGN KEY () REFERENCES ()
 
 );
