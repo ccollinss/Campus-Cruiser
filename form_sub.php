@@ -1,6 +1,6 @@
 <?php
-    $tempStlye = "<style>span {color: green; text-decoration: underline;)</style>";
-    echo $tempStlye;
+    $tempStyle = "<style>span {color: green; text-decoration: underline;}</style>";
+    echo $tempStyle;
     
     echo " <h2>Testing Page to show values of form</h2>";
     echo "<hr>";
@@ -20,19 +20,18 @@
     $sCredits = $_POST["student_credits"];
     echo "<h5>Credits: <span>$sCredits</span></h5>";
 
-    $sGpa = $_POST["student_gpa"];
+    $sGpa = $_POST["gpa"];  // Changed from student_gpa
     echo "<h5>GPA: <span>$sGpa</span></h5>";
 
     $sGender = $_POST["student_gender"];
     echo "<h5>Gender: <span>$sGender</span></h5>";
     
-    if (isset($_POST["student_hosuing"])) {
+    if (isset($_POST["student_housing"])) {  // Fixed typo: student_hosuing → student_housing
         echo "<h5>Housing: <span>On campus</span></h5>";
     } else {
         echo "<h5>Housing: <span>Off campus</span></h5>";
     }
 
     $sEmergencyContact = $_POST["student_emergency_phone"];
-    echo "<h5> Emergency_Contact: <span>$sEmergencyContact</span></h5>";
-
+    echo "<h5>Emergency Contact: <span>$sEmergencyContact</span></h5>";
 ?>
