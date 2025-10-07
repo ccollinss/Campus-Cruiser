@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- NOTE: This page collects one FULL ROW to insert into the student table.
+         We use a <form> so the browser sends field=value pairs to our server. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Student</title>
+</head>
+<body>
+    <h2>Enter student details and click "Insert"</h2>
+
+    <!-- FORM WIRING
+         action  = URL on YOUR server that handles the INSERT (example shown)
+         method  = POST for creates (so data isn't exposed in the URL)
+         Each input MUST have a name that matches a DB column (or a field your server expects). -->
+    <form action="submitValues.php" method="POST">
+
+        <!-- STUDENT_ID → student.student_id (CHAR(5))
+             - minlength/maxlength enforce exactly 5 chars in the browser.
+             - Add pattern if you require digits only: pattern="[0-9]{5}" -->
+        <label for="student_id">Student ID</label><br>
+        <input id="student_id" name="student_id" type="text" maxlength="5" minlength="5" required>
+        <br><br>
+
+        <!-- NAME → student.name (VARCHAR(50)) -->
+        <label for="name">Name</label><br>
+        <input id="name" name="student_name" type="text" maxlength="50" required>
+        <br><br>
+
+        <!-- EMAIL → student.email (VARCHAR(50), UNIQUE?)
+             - type="email" gives basic email format validation in the browser. -->
+        <label for="email">Email</label><br>
+        <input id="email" name="student_email" type="email" maxlength="50" required>
+        <br><br>
+
+        <!-- MAJOR → student.major (ENUM or VARCHAR)
+             - The <option value="..."> is what gets submitted. -->
+        <label for="major">Major</label><br>
+        <select id="major" name="student_major">
+            <option value="Undecided">Undecided</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Chemistry">Chemistry</option>
+        </select>
+        <br><br>
+
+        <!-- CREDITS → student.credits (INT)
+             - step="1" restricts to whole numbers.
+             - min/max enforce a sane range client-side; server must still re-validate. -->
+        <label for="credits">Credits</label><br>
+        <input id="credits" name="student_credits" type="number" min="0" max="1000" step="1" required>
+        <br><br>
+
+        <!-- GPA → student.gpa (DECIMAL(4,3) or similar)
+             - step controls decimal precision in the UI; server should validate to allowed scale. -->
+        <label for="gpa">GPA</label><br>
+        <input id="gpa" name="gpa" type="number" min="0" max="4" step="0.001" required>
+        <br><br>
+
+        <!-- GENDER → student.gender (ENUM: 'Male','Female','Non-binary', etc.)
+             - Same name="gender" groups the radios (mutually exclusive).
+             - value="..." is what the server receives. -->
+        <label>Gender</label><br>
+        <input id="g_m" type="radio" name="student_gender" value="Male"><label for="g_m"> Male</label>
+        <input id="g_f" type="radio" name="student_gender" value="Female"><label for="g_f"> Female</label>
+        <input id="g_nb" type="radio" name="student_gender" value="Non-binary"><label for="g_nb"> Non-binary</label>
+        <br><br>
+
+        <!-- LIVES_ON_CAMPUS → student.lives_on_campus (BOOLEAN / CHAR(1))
+             - CHECKBOX SUBMISSION QUIRK: if unchecked, NOTHING is sent for this name.
+               On the server, treat missing as false/'N'.
+             - If you prefer always receiving a value, use a hidden field default "N"
+               then override with "Y" when checked. -->
+        <input id="loc" type="checkbox" name="student_housing" value="Y">
+        <label for="loc">Check this box if student lives on campus.</label>
+        <br><br>
+        
+        <!-- EMERGENCY_PHONE → student.emergency_phone (VARCHAR(12))
+             - pattern enforces ###-###-#### on the client.
+             - Add placeholder to show expected format. -->
+        <label for="em_phone">Emergency phone contact:</label>
+        <input id="em_phone" name="student_emergency_phone" type="tel"
+               placeholder="123-456-7890"
+               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+
+        <br><br>
+
+        <!-- SUBMIT → Sends all name=value pairs to the server endpoint in action="..." -->
+        <input type="submit" value="Insert">
+    </form>
+
+    <!-- REMINDERS FOR STUDENTS:
+         1) Browser validation helps, but the SERVER must:
+            - validate again,
+            - sanitize input,
+            - use prepared statements/parameters to prevent SQL injection.
+         2) Column names may differ; match each input's name="..." to what your server expects. -->
+</body>
+</html>
