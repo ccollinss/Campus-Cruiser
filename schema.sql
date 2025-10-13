@@ -9,9 +9,7 @@ CREATE TABLE Students (
     student_insurance VARCHAR(50),
     emergency_contact VARCHAR(50),
     emergency_contact_phone VARCHAR(20),
-    registration date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-    FOREIGN KEY () REFERENCES ()
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE Events (
@@ -21,8 +19,6 @@ CREATE TABLE Events (
     event_time TIME NOT NULL,
     event_location VARCHAR(100) NOT NULL,
     event_description TEXT
-
-    FOREIGN KEY () REFERENCES ()
 );
 
 CREATE TABLE Vehicles (
@@ -32,8 +28,6 @@ CREATE TABLE Vehicles (
     vehicle_year INT(4),
     license_plate VARCHAR(20) UNIQUE NOT NULL,
     vehicle_availability BOOLEAN DEFAULT TRUE
-
-    FOREIGN KEY () REFERENCES ()
 );
 
 CREATE TABLE Drivers (
@@ -46,8 +40,6 @@ CREATE TABLE Drivers (
     driver_availability BOOLEAN DEFAULT TRUE
     driver_age INT(2) CHECK (driver_age >= 18) NOT NULL
     
-    FOREIGN KEY () REFERENCES ()
-
 );
 
 CREATE TABLE Payments (
@@ -59,7 +51,9 @@ CREATE TABLE Payments (
     payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     transaction_id VARCHAR(100) UNIQUE NOT NULL,
 
-    FOREIGN KEY () REFERENCES ()
+    FOREIGN KEY (student_id) REFERENCES Students(student_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE Bookings (
@@ -73,10 +67,22 @@ CREATE TABLE Bookings (
     dropoff_location VARCHAR(100) NOT NULL,
     booking_date DATE NOT NULL,
     booking_time TIME NOT NULL,
-    ride_status VARCHAR(20) CHECK (status IN ('Pending', 'Confirmed', 'Cancelled')),
+    ride_status VARCHAR(20) CHECK (ride_status IN ('Pending', 'Confirmed', 'Cancelled')),
 
-    FOREIGN KEY () REFERENCES ()
+    FOREIGN KEY (student_id) REFERENCES Students(student_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (driver_id) REFERENCES Drivers(driver_id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES Events(event_id)   
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    FOREIGN KEY (payment_id) REFERENCES Payments(payment_id)
+        ON DELETE SET NULL
         ON UPDATE CASCADE
 );
 
@@ -86,7 +92,10 @@ CREATE TABLE Create_Event (
     event_id INT,
     role VARCHAR(50) CHECK (role IN ('Student', 'Organizer', 'Volunteer')),
 
-    FOREIGN KEY () REFERENCES ()
+    FOREIGN KEY (student_id) REFERENCES Students(student_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES Events(event_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
@@ -98,5 +107,7 @@ CREATE TABLE Ride_Groups (
     group_description TEXT,
     created_by INT,
 
-    FOREIGN KEY () REFERENCES ()
+    FOREIGN KEY (created_by) REFERENCES Students(student_id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
 );
