@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Cruiser - Search Vehicles</title>
+    <link rel="stylesheet" href="searchVehicle.css">
+</head>
+
+<body>
+    <header>
+        <!--navigation bar-->
+        <nav class="navbar">
+
+            <div class="img-container">
+                <img src="campusCruiserLogo.png" class="nav-logo" alt="Campus Cruiser Logo" id="logo"
+                    onclick="location.href='home.html'">
+            </div>
+
+            <ul class="nav-link-container">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="browse-trips.html" class="nav-link">Browse Trips</a></li>
+                <li><a href="bookings.html" class="nav-link">My Bookings</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+
+            <div class="menu-icon" id="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+        <!--page header-->
+        <section class="page-header">
+            <h1>Available Vehicles</h1>
+            <p>Find the perfect ride for your next adventure</p>
+        </section>
+
+        <!--search summary section-->
+        <section class="search-summary-container">
+            <div class="search-summary">
+                <div class="summary-header">
+                    <h3>Your Search</h3>
+                    <button class="edit-search-btn" id="edit-search-btn">Edit Search</button>
+                </div>
+                
+                <!--summary details-->
+                <div class="summary-content" id="summary-content">
+                    <div class="summary-item">
+                        <span class="summary-label">📍 Route:</span>
+                        <span class="summary-value" id="summary-route">VSU Multi-Purpose Center → Richmond, VA</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">📅 Departure:</span>
+                        <span class="summary-value" id="summary-departure">Nov 15, 2025 at 10:00 AM</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">🔄 Return:</span>
+                        <span class="summary-value" id="summary-return">Nov 17, 2025 at 6:00 PM</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">👥 Seats:</span>
+                        <span class="summary-value" id="summary-seats">4 passengers</span>
+                    </div>
+                </div>
+
+                <!--edit form (hidden by default)-->
+                <div class="summary-edit-form hidden" id="summary-edit-form">
+                    <div class="edit-form-row">
+                        <div class="edit-form-group">
+                            <label class="edit-label">Departure Address</label>
+                            <input type="text" class="edit-input" id="edit-departure-address" placeholder="e.g., VSU Multi-Purpose Center">
+                        </div>
+                        <div class="edit-form-group">
+                            <label class="edit-label">Return Address</label>
+                            <input type="text" class="edit-input" id="edit-return-address" placeholder="e.g., Richmond, VA">
+                        </div>
+                    </div>
+                    <div class="edit-form-row">
+                        <div class="edit-form-group">
+                            <label class="edit-label">Departure Date</label>
+                            <input type="date" class="edit-input" id="edit-departure-date">
+                        </div>
+                        <div class="edit-form-group">
+                            <label class="edit-label">Departure Time</label>
+                            <input type="time" class="edit-input" id="edit-departure-time">
+                        </div>
+                    </div>
+                    <div class="edit-form-row">
+                        <div class="edit-form-group">
+                            <label class="edit-label">Return Date</label>
+                            <input type="date" class="edit-input" id="edit-return-date">
+                        </div>
+                        <div class="edit-form-group">
+                            <label class="edit-label">Return Time</label>
+                            <input type="time" class="edit-input" id="edit-return-time">
+                        </div>
+                    </div>
+                    <div class="edit-form-row">
+                        <div class="edit-form-group">
+                            <label class="edit-label">Seats</label>
+                            <input type="number" class="edit-input" id="edit-seats" min="1" max="15">
+                        </div>
+                    </div>
+                    <div class="edit-form-buttons">
+                        <button class="save-search-btn" id="save-search-btn">Update Search</button>
+                        <button class="cancel-edit-btn" id="cancel-edit-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--search filters and results container-->
+        <div class="content-wrapper">
+            
+            <!--sidebar filters-->
+            <aside class="filters-sidebar">
+                <div class="filter-section">
+                    <h3>Filter Results</h3>
+                    
+                    <!--vehicle type filter-->
+                    <div class="filter-group">
+                        <label class="filter-label">Vehicle Type</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="sedan" class="filter-checkbox">
+                                <span>Sedan</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="suv" class="filter-checkbox">
+                                <span>SUV</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="van" class="filter-checkbox">
+                                <span>Van</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="truck" class="filter-checkbox">
+                                <span>Truck</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!--seats filter-->
+                    <div class="filter-group">
+                        <label class="filter-label">Minimum Seats</label>
+                        <select class="filter-input" id="filter-seats">
+                            <option value="1">1+ seats</option>
+                            <option value="2">2+ seats</option>
+                            <option value="4">4+ seats</option>
+                            <option value="6">6+ seats</option>
+                            <option value="8">8+ seats</option>
+                        </select>
+                    </div>
+
+                    <!--price range filter-->
+                    <div class="filter-group">
+                        <label class="filter-label">Price Range (per day)</label>
+                        <div class="price-range">
+                            <input type="number" class="filter-input price-input" id="min-price" placeholder="Min" min="0">
+                            <span class="price-separator">-</span>
+                            <input type="number" class="filter-input price-input" id="max-price" placeholder="Max" min="0">
+                        </div>
+                    </div>
+
+                    <!--features filter-->
+                    <div class="filter-group">
+                        <label class="filter-label">Features</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="bluetooth" class="filter-checkbox">
+                                <span>Bluetooth</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="gps" class="filter-checkbox">
+                                <span>GPS</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="backup-camera" class="filter-checkbox">
+                                <span>Backup Camera</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="usb-charging" class="filter-checkbox">
+                                <span>USB Charging</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!--filter buttons-->
+                    <div class="filter-buttons">
+                        <button class="clear-filters-btn">Clear All</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!--results section-->
+            <section class="results-section">
+                
+                <!--sort bar-->
+                <div class="sort-bar">
+                    <p class="results-count"><span id="result-count">12</span> vehicles available</p>
+                    <div class="sort-controls">
+                        <label for="sort-select">Sort by:</label>
+                        <select id="sort-select" class="sort-select">
+                            <option value="recommended">Recommended</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="seats">Seats: Most to Least</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--vehicle results grid-->
+                <div class="vehicles-grid" id="vehicles-grid">
+                    
+                    <!--vehicle card 1-->
+                    <div class="vehicle-card" data-type="sedan" data-seats="5" data-price="45">
+                        <div class="vehicle-image">
+                            🚗
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Toyota Camry</h3>
+                                <div class="vehicle-rating">⭐ 4.8</div>
+                            </div>
+                            <p class="vehicle-type">Sedan • 5 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">Backup Camera</span>
+                                <span class="feature-badge">USB</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$45</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 2-->
+                    <div class="vehicle-card" data-type="suv" data-seats="7" data-price="65">
+                        <div class="vehicle-image">
+                            🚙
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Honda CR-V</h3>
+                                <div class="vehicle-rating">⭐ 4.9</div>
+                            </div>
+                            <p class="vehicle-type">SUV • 7 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">GPS</span>
+                                <span class="feature-badge">Backup Camera</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$65</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 3-->
+                    <div class="vehicle-card" data-type="van" data-seats="8" data-price="85">
+                        <div class="vehicle-image">
+                            🚐
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Chrysler Pacifica</h3>
+                                <div class="vehicle-rating">⭐ 4.7</div>
+                            </div>
+                            <p class="vehicle-type">Van • 8 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">GPS</span>
+                                <span class="feature-badge">USB</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$85</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 4-->
+                    <div class="vehicle-card" data-type="sedan" data-seats="5" data-price="40">
+                        <div class="vehicle-image">
+                            🚗
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Nissan Altima</h3>
+                                <div class="vehicle-rating">⭐ 4.6</div>
+                            </div>
+                            <p class="vehicle-type">Sedan • 5 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">USB</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$40</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 5-->
+                    <div class="vehicle-card" data-type="suv" data-seats="5" data-price="70">
+                        <div class="vehicle-image">
+                            🚙
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Jeep Grand Cherokee</h3>
+                                <div class="vehicle-rating">⭐ 4.9</div>
+                            </div>
+                            <p class="vehicle-type">SUV • 5 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">GPS</span>
+                                <span class="feature-badge">Backup Camera</span>
+                                <span class="feature-badge">USB</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$70</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 6-->
+                    <div class="vehicle-card" data-type="truck" data-seats="5" data-price="75">
+                        <div class="vehicle-image">
+                            🛻
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Ford F-150</h3>
+                                <div class="vehicle-rating">⭐ 4.8</div>
+                            </div>
+                            <p class="vehicle-type">Truck • 5 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">Backup Camera</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$75</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 7-->
+                    <div class="vehicle-card" data-type="sedan" data-seats="5" data-price="50">
+                        <div class="vehicle-image">
+                            🚗
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Honda Accord</h3>
+                                <div class="vehicle-rating">⭐ 4.9</div>
+                            </div>
+                            <p class="vehicle-type">Sedan • 5 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">GPS</span>
+                                <span class="feature-badge">USB</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$50</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 8-->
+                    <div class="vehicle-card" data-type="van" data-seats="12" data-price="95">
+                        <div class="vehicle-image">
+                            🚐
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Ford Transit</h3>
+                                <div class="vehicle-rating">⭐ 4.7</div>
+                            </div>
+                            <p class="vehicle-type">Van • 12 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">GPS</span>
+                                <span class="feature-badge">USB</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$95</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 9-->
+                    <div class="vehicle-card" data-type="suv" data-seats="7" data-price="68">
+                        <div class="vehicle-image">
+                            🚙
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Toyota Highlander</h3>
+                                <div class="vehicle-rating">⭐ 4.8</div>
+                            </div>
+                            <p class="vehicle-type">SUV • 7 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">GPS</span>
+                                <span class="feature-badge">Backup Camera</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$68</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 10-->
+                    <div class="vehicle-card" data-type="sedan" data-seats="5" data-price="42">
+                        <div class="vehicle-image">
+                            🚗
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Mazda 6</h3>
+                                <div class="vehicle-rating">⭐ 4.7</div>
+                            </div>
+                            <p class="vehicle-type">Sedan • 5 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">Backup Camera</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$42</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 11-->
+                    <div class="vehicle-card" data-type="truck" data-seats="5" data-price="78">
+                        <div class="vehicle-image">
+                            🛻
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Chevrolet Silverado</h3>
+                                <div class="vehicle-rating">⭐ 4.8</div>
+                            </div>
+                            <p class="vehicle-type">Truck • 5 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">GPS</span>
+                                <span class="feature-badge">Backup Camera</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$78</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--vehicle card 12-->
+                    <div class="vehicle-card" data-type="van" data-seats="8" data-price="88">
+                        <div class="vehicle-image">
+                            🚐
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-title">Dodge Grand Caravan</h3>
+                                <div class="vehicle-rating">⭐ 4.6</div>
+                            </div>
+                            <p class="vehicle-type">Van • 8 Seats</p>
+                            <div class="vehicle-features">
+                                <span class="feature-badge">Bluetooth</span>
+                                <span class="feature-badge">USB</span>
+                            </div>
+                            <div class="vehicle-footer">
+                                <div class="vehicle-price">
+                                    <span class="price-amount">$88</span>
+                                    <span class="price-period">/day</span>
+                                </div>
+                                <button class="book-btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!--footer-->
+    <footer class="footer-container">
+        <div class="footer-content">
+            <!--quick links-->
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="#terms" class="footer-link">Terms of Service</a>
+                    <a href="#privacy" class="footer-link">Privacy Policy</a>
+                    <a href="contact" class="footer-link">Contact Us</a>
+                </div>
+            </div>
+
+            <!--social media-->
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="footer-links">
+                    <a href="https://www.facebook.com/CampusCruiser" class="footer-link">Facebook</a>
+                    <a href="https://www.twitter.com/CampusCruiser" class="footer-link">Twitter</a>
+                    <a href="https://www.instagram.com/CampusCruiser" class="footer-link">Instagram</a>
+                </div>
+            </div>
+
+            <!--contact info-->
+            <div class="footer-section">
+                <h4>Need Help?</h4>
+                <p class="footer-text">Email us at <a href="/cdn-cgi/l/email-protection#acdfd9dcdcc3ded8eccfcdc1dcd9dfcfded9c5dfc9de82cfc3c1"><span class="__cf_email__" data-cfemail="a4d7d1d4d4cbd6d0e4c7c5c9d4d1d7c7d6d1cdd7c1d68ac7cbc9">[email&#160;protected]</span></a></p>
+                <p class="footer-text">Call us: (804) 555-RIDE</p>
+            </div>
+        </div>
+
+        <!--footer bottom-->
+        <div class="footer-bottom">
+            <p>&copy; 2025 Campus Cruiser. All rights reserved.</p>
+            <p><small>coded with ♥ by Campus Cruiser Dev Team</small></p>
+        </div>
+    </footer>
+    <script src="searchVehicle.js"></script>
+</body>
+</html>
