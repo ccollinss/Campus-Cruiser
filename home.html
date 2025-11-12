@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Cruiser - Home</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <header>
+        <!--navigation bar-->
+        <nav class="navbar">
+
+            <div class="img-container">
+                <img src="campusCruiserLogo.png" class="nav-logo" alt="Campus Cruiser Logo" id="logo"
+                    onclick="location.href='home.html'">
+            </div>
+
+            <ul class="nav-link-container">
+                <li><a href="home.html" class="nav-link active">Home</a></li>
+                <li><a href="browse-trips.html" class="nav-link">Browse Trips</a></li>
+                <li><a href="bookings.html" class="nav-link">My Bookings</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+
+            <div class="menu-icon" id="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+        <!--hero section-->
+        <section class="hero-container">
+            <div class="hero-text">
+                <h1>Ready to Get Off Campus?</h1>
+                <p>Join group trips or rent vehicles for your next adventure. Save money, make memories.</p>
+            </div>
+        </section>
+
+        <!--search section-->
+        <section class="search-container">
+            <div class="trip-type-tab">
+                <button class="trip-tab active" id="round-trip-btn">Round Trip</button>
+                <button class="trip-tab" id="one-way-btn">One Way</button>
+            </div>
+
+            <!--search form-->
+            <form id="search-form" method="GET" action="searchVehicle.html">
+
+                <!--departure date-->
+                <div class="form-group" id="departure-date-group">
+                    <label class="form-label">Departure Date <span class="required">*</span></label>
+                    <input class="form-input" type="date" id="departure-date" name="departure-date" required
+                        aria-label="Departure date">
+                </div>
+
+                <!--departure time-->
+                <div class="form-group" id="departure-time-group">
+                    <label class="form-label">Departure Time <span class="required">*</span></label>
+                    <input class="form-input" type="time" id="departure-time" name="departure-time" required
+                        aria-label="Departure time">
+                </div>
+
+                <!---return date-->
+                <div class="form-group" id="return-date-group">
+                    <label class="form-label">Return Date <span class="required">*</span></label>
+                    <input class="form-input" type="date" id="return-date" name="return-date" required
+                        aria-label="Return date">
+                </div>
+
+                <!--return time-->
+                <div class="form-group" id="return-time-group">
+                    <label class="form-label">Return Time <span class="required">*</span></label>
+                    <input class="form-input" type="time" id="return-time" name="return-time" required
+                        aria-label="Return time">
+                </div>
+
+                <!--departure address-->
+                <div class="form-group-full-width" id="departure-address-group">
+                    <label class="form-label">Departure Address <span class="required">*</span></label>
+                    <input class="form-input" type="text" id="departure-address" name="departure-address" required
+                        placeholder="e.g., VSU Multi-Purpose Center" aria-label="Departure address">
+                </div>
+
+                <!--return address-->
+                <div class="form-group-full-width" id="return-address-group">
+                    <label class="form-label">Return Address <span class="required">*</span></label>
+                    <input class="form-input" type="text" id="return-address" name="return-address" required
+                        placeholder="e.g., Richmond, VA" aria-label="Return address">
+                </div>
+
+                <!--seats-->
+                <div class="form-group-full-width" id="seats-group">
+                    <label class="form-label">Seats <span class="required">*</span></label>
+                    <input class="form-input" type="number" id="seats" name="seats" min="1" max="15" required
+                        aria-label="Number of seats">
+                </div>
+
+                <!--search buttons-->
+                <div class="form-buttons">
+                    <button type="submit" class="search-btn" aria-label="Search trips" href="searchVehicle.html">Search Vehicles</button>
+                    <button type="submit" class="trip-btn" id="create-trip-btn" aria-label="Create a trip">Create New Group Trip</button>
+                </div>
+            </form>
+        </section>
+
+        <!--featured events-->
+        <div class="featured-events">
+            <h2 class="events-header">Featured Group Trips</h2>
+            <!--filter tags-->
+            <div class="filter-tags">
+                <div class="filter-tag">Concerts</div>
+                <div class="filter-tag-active">Homecoming</div>
+                <div class="filter-tag">Orgs</div>
+                <div class="filter-tag">Football</div>
+                <div class="filter-tag">Expo</div>
+            </div>
+
+            <div class="events-grid">
+
+                <!--event card 1-->
+                <div class="event-card">
+                    <div class="event-image">
+                        🏈
+                        <div class="spots-badge">4/6 spots filled</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Homecoming Game Squad</h3>
+                        <div class="event-price">$8 per person</div>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📅</div>
+                                <span>Sat, Nov 2 • 3:30 PM - 9:00PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📍</div>
+                                <span>VSU Student Center</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">👤</div>
+                                <span>Organized by Sarah M.</span>
+                            </div>
+                        </div>
+                        <button class="reserve-btn">Reserve Your Seat</button>
+                    </div>
+                </div>
+
+                <!--event card 2-->
+                <div class="event-card">
+                    <div class="event-image">
+                        🎤
+                        <div class="spots-badge">3/4 spots filled</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Live Concert @ The National</h3>
+                        <div class="event-price">$15 per person</div>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📅</div>
+                                <span>Fri, Oct 18 • 6:00 PM - 11:00PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📍</div>
+                                <span>Richmond, VA</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">👤</div>
+                                <span>Organized by Mike L.</span>
+                            </div>
+                        </div>
+                        <button class="reserve-btn">Reserve Your Seat</button>
+                    </div>
+                </div>
+
+                <!--event card 3-->
+                <div class="event-card">
+                    <div class="event-image">
+                        🎡
+                        <div class="spots-badge">7/10 spots filled</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Fall Festival Fun</h3>
+                        <div class="event-price">$12 per person</div>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📅</div>
+                                <span>Sat, Oct 26 • 2:00 PM - 8:00PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📍</div>
+                                <span>Williamsburg, VA</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">👤</div>
+                                <span>Organized by Emily R.</span>
+                            </div>
+                        </div>
+                        <button class="reserve-btn">Reserve Your Seat</button>
+                    </div>
+                </div>
+
+                <!--event card 4-->
+                <div class="event-card">
+                    <div class="event-image">
+                        🛼
+                        <div class="spots-badge">15/20 spots filled</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">SkateLab Social</h3>
+                        <div class="event-price">$17 per person</div>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📅</div>
+                                <span>Sat, Nov 22 • 7:00 PM - 11:00PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📍</div>
+                                <span>Norfolk, VA</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">👤</div>
+                                <span>Organized by Cam B.</span>
+                            </div>
+                        </div>
+                        <button class="reserve-btn">Reserve Your Seat</button>
+                    </div>
+                </div>
+
+                <!--event card 5-->
+                <div class="event-card">
+                    <div class="event-image">
+                        🪐
+                        <div class="spots-badge">3/6 spots filled</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Science Center</h3>
+                        <div class="event-price">$11 per person</div>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📅</div>
+                                <span>Tue, Nov 25 • 10:00 AM - 2:00PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📍</div>
+                                <span>Richmond, VA</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">👤</div>
+                                <span>Organized by xxxx</span>
+                            </div>
+                        </div>
+                        <button class="reserve-btn">Reserve Your Seat</button>
+                    </div>
+                </div>
+
+                <!--event card 6-->
+                <div class="event-card">
+                    <div class="event-image">
+                        🥇
+                        <div class="spots-badge">9/12 spots filled</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Pitch Competition</h3>
+                        <div class="event-price">$20 per person</div>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📅</div>
+                                <span>Tue, Nov 25 • 9:00 AM - 5:00PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📍</div>
+                                <span>Baltimore, MD</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">👤</div>
+                                <span>Organized by xxxx</span>
+                            </div>
+                        </div>
+                        <button class="reserve-btn">Reserve Your Seat</button>
+                    </div>
+                </div>
+
+                <!--event card 7-->
+                <div class="event-card">
+                    <div class="event-image">
+                        🎬
+                        <div class="spots-badge">2/4 spots filled</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Wicked Part 2</h3>
+                        <div class="event-price">$20 per person</div>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📅</div>
+                                <span>Fri, Nov 21 • 6:45PM - 10:00pm</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📍</div>
+                                <span>Colonial Heights, VA</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">👤</div>
+                                <span>Organized by xxxx</span>
+                            </div>
+                        </div>
+                        <button class="reserve-btn">Reserve Your Seat</button>
+                    </div>
+                </div>
+
+                <!--event card 8-->
+                <div class="event-card">
+                    <div class="event-image">
+                        🧬
+                        <div class="spots-badge">8/10 spots filled</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Research Symposium</h3>
+                        <div class="event-price">$14 per person</div>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📅</div>
+                                <span>Mon, Dec 8 • 10:00AM - 4:00PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">📍</div>
+                                <span>Greensboro, NC</span>
+                            </div>
+                            <div class="event-detail">
+                                <div class="event-detail-icon">👤</div>
+                                <span>Organized by xxxx</span>
+                            </div>
+                        </div>
+                        <button class="reserve-btn">Reserve Your Seat</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!--see all button-->
+            <div class="see-all-button-container">
+                <button class="see-all-btn" aria-label="See all events">View All</button>
+            </div>
+        </div>
+
+        <!--how it works section-->
+        <section class="how-it-works">
+            <h2>How Campus Cruiser Works</h2>
+            <div class="steps-container">
+
+                <!--step 1-->
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Search and Browse</h3>
+                    <p class="step-description">Find existing group trips or search for available vehicles that fit your
+                        schedule.</p>
+                </div>
+
+                <!--step 2-->
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Join or Create</h3>
+                    <p class="step-description">Reserve your spot in a group trip or create your own and invite friends
+                        to split costs.</p>
+                </div>
+                <!--step 3-->
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Pay Your Share</h3>
+                    <p class="step-description">Securely pay only your portion. For group trips, payment is collected
+                        when spots fill up.</p>
+                </div>
+                <!--step 4-->
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Enjoy the Ride</h3>
+                    <p class="step-description">Pick up your vehicle or meet your group at the designated location and
+                        enjoy your trip!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--footer-->
+    <footer class="footer-container">
+        <div class="footer-content">
+            <!--quick links-->
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="#terms" class="footer-link">Terms of Service</a>
+                    <a href="#privacy" class="footer-link">Privacy Policy</a>
+                    <a href="contact" class="footer-link">Contact Us</a>
+                </div>
+            </div>
+
+            <!--social media-->
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="footer-links">
+                    <a href="https://www.facebook.com/CampusCruiser" class="footer-link">Facebook</a>
+                    <a href="https://www.twitter.com/CampusCruiser" class="footer-link">Twitter</a>
+                    <a href="https://www.instagram.com/CampusCruiser" class="footer-link">Instagram</a>
+                </div>
+            </div>
+
+            <!--contact info-->
+            <div class="footer-section">
+                <h4>Need Help?</h4>
+                <p class="footer-text">Email us at <a
+                        href="mailto:support@campuscruiser.com">support@campuscruiser.com</a></p>
+                <p class="footer-text">Call us: (804) 555-RIDE</p>
+            </div>
+        </div>
+
+        <!--footer bottom-->
+        <div class="footer-bottom">
+            <p>&copy; 2025 Campus Cruiser. All rights reserved.</p>
+            <p><small>coded with care &lt;3</small></p>
+        </div>
+    </footer>
+    <script src="home.js" defer></script>
+</body>
+</html>
