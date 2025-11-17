@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Cruiser - Create Group Trip</title>
+    <link rel="stylesheet" href="createTrip.css">
+</head>
+
+<body>
+    <header>
+        <!--navigation bar-->
+        <nav class="navbar">
+
+            <div class="img-container">
+                <img src="campusCruiserLogo.png" class="nav-logo" alt="Campus Cruiser Logo" id="logo"
+                    onclick="location.href='home.html'">
+            </div>
+
+            <ul class="nav-link-container">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="browse-trips.html" class="nav-link active">Browse Trips</a></li>
+                <li><a href="bookings.html" class="nav-link">My Bookings</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+
+            <div class="menu-icon" id="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+        <!--page header-->
+        <section class="page-header">
+            <h1>Let's Create Your Group Trip</h1>
+            <p>Organize a trip and split costs with friends</p>
+        </section>
+
+        <!--create trip container with sidebar-->
+        <div class="form-wrapper">
+            
+            <!--sidebar with info-->
+            <aside class="trip-info-sidebar">
+                
+                <!--how it works-->
+                <div class="info-card">
+                    <h3 class="info-card-title">How it Works</h3>
+                    <ol class="info-steps">
+                        <li><strong>Create Trip:</strong> Set up your group details and destination.</li>
+                        <li><strong>Share Link:</strong> Invite friends to join your trip.</li>
+                        <li><strong>Split Costs:</strong> Everyone pays their share when booking.</li>
+                    </ol>
+                </div>
+
+                <!--trip info summary-->
+                <div class="info-card" id="trip-summary-card">
+                    <h3 class="info-card-title">Your Trip Info</h3>
+                    <div class="trip-summary-item">
+                        <span class="summary-label">Trip Type:</span>
+                        <span class="summary-value" id="summary-trip-type">Not selected</span>
+                    </div>
+                    <div class="trip-summary-item" id="summary-vehicle-section" style="display: none;">
+                        <span class="summary-label">Vehicle:</span>
+                        <span class="summary-value" id="summary-vehicle">Not selected</span>
+                    </div>
+                    <div class="trip-summary-item" id="summary-departure-section" style="display: none;">
+                        <span class="summary-label">From:</span>
+                        <span class="summary-value" id="summary-departure">Not selected</span>
+                    </div>
+                    <div class="trip-summary-item" id="summary-destination-section" style="display: none;">
+                        <span class="summary-label">To:</span>
+                        <span class="summary-value" id="summary-destination">Not selected</span>
+                    </div>
+                    <div class="trip-summary-item">
+                        <span class="summary-label">Departure Date:</span>
+                        <span class="summary-value" id="summary-dep-date">Not selected</span>
+                    </div>
+                    <div class="trip-summary-item" id="summary-dep-time-section" style="display: none;">
+                        <span class="summary-label">Departure Time:</span>
+                        <span class="summary-value" id="summary-dep-time">Not selected</span>
+                    </div>
+                    <div class="trip-summary-item">
+                        <span class="summary-label">Return Date:</span>
+                        <span class="summary-value" id="summary-ret-date">Not selected</span>
+                    </div>
+                    <div class="trip-summary-item" id="summary-ret-time-section" style="display: none;">
+                        <span class="summary-label">Return Time:</span>
+                        <span class="summary-value" id="summary-ret-time">Not selected</span>
+                    </div>
+                    <div class="trip-summary-item">
+                        <span class="summary-label">Number of Seats:</span>
+                        <span class="summary-value" id="summary-seats">4</span>
+                    </div>
+                    <div class="trip-summary-item">
+                        <span class="summary-label">Price Per Person:</span>
+                        <span class="summary-value" id="summary-price">$0.00</span>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!--main form-->
+            <form id="create-trip-form" class="create-trip-form">
+                
+                <!--trip information section-->
+                <section class="form-section">
+                    <h2 class="section-title">Trip Information</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label class="form-label">Trip Name <span class="required">*</span></label>
+                            <input type="text" class="form-input" id="trip-name" name="trip-name" required
+                                placeholder="e.g., Homecoming Game Squad, Concert Night Out">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label class="form-label">Event Type <span class="required">*</span></label>
+                            <div class="tag-group" role="group" aria-label="Event type selection">
+                                <button type="button" class="tag" data-type="homecoming" aria-label="Homecoming event">Homecoming</button>
+                                <button type="button" class="tag" data-type="concert" aria-label="Concert event">Concerts</button>
+                                <button type="button" class="tag" data-type="sports" aria-label="Sports event">Sports</button>
+                                <button type="button" class="tag" data-type="festival" aria-label="Festival event">Festival</button>
+                                <button type="button" class="tag" data-type="conference" aria-label="Conference event">Conference</button>
+                                <button type="button" class="tag" data-type="orgs" aria-label="Student organizations">Orgs</button>
+                                <button type="button" class="tag" data-type="community" aria-label="Community service event">Community Service</button>
+                                <button type="button" class="tag" data-type="other" aria-label="Other event">Other</button>
+                            </div>
+                            <input type="hidden" id="event-type" name="event-type" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label class="form-label">Description (Optional)</label>
+                            <textarea class="form-textarea" id="description" name="description" rows="4"
+                                placeholder="Tell your group what this trip is about and any other important details..."></textarea>
+                        </div>
+                    </div>
+
+                    <!--group details (moved here)-->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Number of Seats <span class="required">*</span></label>
+                            <div class="counter-input">
+                                <button type="button" class="counter-btn" id="seats-decrease">−</button>
+                                <input type="number" class="counter-value" id="total-seats" name="total-seats" 
+                                    min="2" max="15" value="4" readonly required>
+                                <button type="button" class="counter-btn" id="seats-increase">+</button>
+                            </div>
+                            <p class="input-helper">You can offer up to 15 seats.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Price Per Person <span class="required">*</span></label>
+                            <div class="input-with-prefix">
+                                <span class="input-prefix">$</span>
+                                <input type="number" class="form-input with-prefix" id="price-per-person" 
+                                    name="price-per-person" min="1" step="0.01" required>
+                            </div>
+                            <p class="input-helper">Suggested price auto-calculated</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="public-trip" name="public-trip" checked>
+                                <label for="public-trip" class="checkbox-label-inline">
+                                    Make this trip public (others can discover and join)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--vehicle & route section (conditional)-->
+                <section class="form-section" id="vehicle-route-section">
+                    <h2 class="section-title">Vehicle & Route</h2>
+                    
+                    <!--vehicle display (pre-filled)-->
+                    <div class="vehicle-preview" id="vehicle-preview">
+                        <div class="preview-icon" id="preview-icon">🚗</div>
+                        <div class="preview-info">
+                            <h3 class="preview-title" id="preview-title">Toyota Camry</h3>
+                            <p class="preview-specs" id="preview-specs">Sedan • 5 Seats</p>
+                            <p class="preview-price">$<span id="preview-price">45</span>/day</p>
+                        </div>
+                        <button type="button" class="change-vehicle-btn" onclick="location.href='searchVehicle.html'">
+                            Change Vehicle
+                        </button>
+                    </div>
+
+                    <div class="cost-breakdown" id="cost-breakdown-section">
+                        <h4>Estimated Cost Breakdown</h4>
+                        <div class="breakdown-row">
+                            <span>Vehicle Rental (Total)</span>
+                            <span id="breakdown-rental">$45.00</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>÷ Number of Passengers</span>
+                            <span id="breakdown-passengers">4</span>
+                        </div>
+                        <div class="breakdown-row total">
+                            <span>Suggested Price Per Person</span>
+                            <span id="breakdown-suggested">$11.25</span>
+                        </div>
+                        <p class="breakdown-note">
+                            💡 Tip: Set a competitive price to fill seats quickly!
+                        </p>
+                    </div>
+                </section>
+
+                <!--submit buttons-->
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Create Group Trip</button>
+                    <button type="button" class="cancel-btn" onclick="history.back()">Cancel</button>
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+
+    <!--footer-->
+    <footer class="footer-container">
+        <div class="footer-content">
+            <!--quick links-->
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="#terms" class="footer-link">Terms of Service</a>
+                    <a href="#privacy" class="footer-link">Privacy Policy</a>
+                    <a href="contact" class="footer-link">Contact Us</a>
+                </div>
+            </div>
+
+            <!--social media-->
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="footer-links">
+                    <a href="https://www.facebook.com/CampusCruiser" class="footer-link">Facebook</a>
+                    <a href="https://www.twitter.com/CampusCruiser" class="footer-link">Twitter</a>
+                    <a href="https://www.instagram.com/CampusCruiser" class="footer-link">Instagram</a>
+                </div>
+            </div>
+
+            <!--contact info-->
+            <div class="footer-section">
+                <h4>Need Help?</h4>
+                <p class="footer-text">Email us at <a href="mailto:support@campuscruiser.com">support@campuscruiser.com</a></p>
+                <p class="footer-text">Call us: (804) 555-RIDE</p>
+            </div>
+        </div>
+
+        <!--footer bottom-->
+        <div class="footer-bottom">
+            <p>&copy; 2025 Campus Cruiser. All rights reserved.</p>
+        </div>
+    </footer>
+            
+    <script src="createTrip.js"></script>
+</body>
+</html>
