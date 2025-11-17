@@ -1,0 +1,560 @@
+/* --- color variables --- */
+:root {
+    --primary-blue: #1B3B6F;
+    --accent-gold: #F9B233;
+    --soft-blue: #3D5A80;
+    --neutral-light: #F4F4F4;
+    --neutral-dark: #A0A0A0;
+    --text-gray: #333333;
+    --white: #FFFFFF;
+    --success-green: #10b981;
+    --success-light: #d1fae5;
+}
+
+/* --- global styles --- */
+body {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    background: var(--neutral-light);
+    color: var(--text-gray);
+    line-height: 24px;
+}
+
+/* --- navbar --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--primary-blue);
+}
+
+.img-container {
+    flex-shrink: 0;
+}
+
+.nav-link-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 15px;
+}
+
+.nav-link-container li {
+    margin: 0;
+}
+
+.nav-link {
+    color: var(--white);
+    text-decoration: none;
+    padding: 8px 15px;
+    display: inline-block;
+}
+
+.nav-link.active {
+    color: var(--accent-gold);
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: var(--accent-gold);
+    text-decoration: underline;
+}
+
+#logo {
+    max-height: 70px;
+    cursor: pointer;
+}
+
+/* Hide menu icon on desktop */
+.menu-icon {
+    display: none;
+}
+
+/* --- confirmation hero --- */
+.confirmation-hero {
+    background: linear-gradient(135deg, var(--success-green), #059669);
+    color: var(--white);
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--white);
+    color: var(--success-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.confirmation-hero h1 {
+    font-size: 36px;
+    margin: 0 0 10px 0;
+}
+
+.confirmation-hero p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.confirmation-number {
+    font-weight: 600;
+    font-size: 20px !important;
+    margin-top: 15px !important;
+}
+
+.confirmation-number span {
+    font-family: 'Courier New', monospace;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 15px;
+    border-radius: 8px;
+}
+
+/* --- details wrapper --- */
+.details-wrapper {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 30px;
+}
+
+/* --- booking details section --- */
+.booking-details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.details-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: var(--primary-blue);
+    font-size: 24px;
+    margin: 0 0 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--neutral-light);
+}
+
+/* Vehicle info display */
+.vehicle-info-display {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.vehicle-icon-large {
+    font-size: 80px;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--soft-blue));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.vehicle-info-text {
+    flex: 1;
+}
+
+.vehicle-name {
+    font-size: 28px;
+    color: var(--primary-blue);
+    margin: 0 0 8px 0;
+}
+
+.vehicle-specs {
+    color: var(--neutral-dark);
+    font-size: 16px;
+    margin: 0 0 15px 0;
+}
+
+.features-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.feature-tag {
+    background: var(--neutral-light);
+    color: var(--text-gray);
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Trip info grid */
+.trip-info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-row {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.info-icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    background: var(--neutral-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.info-content {
+    flex: 1;
+}
+
+.info-label {
+    font-size: 14px;
+    color: var(--neutral-dark);
+    margin: 0 0 5px 0;
+    font-weight: 600;
+}
+
+.info-value {
+    font-size: 16px;
+    color: var(--text-gray);
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Important information */
+.info-card {
+    background: #fef3c7;
+    border-left: 4px solid var(--accent-gold);
+}
+
+.info-list {
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.info-list li {
+    margin-bottom: 12px;
+}
+
+.info-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* --- booking summary sidebar --- */
+.booking-summary-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.summary-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.summary-title {
+    color: var(--primary-blue);
+    font-size: 20px;
+    margin: 0 0 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--neutral-light);
+}
+
+/* Price breakdown */
+.price-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price-label {
+    font-size: 15px;
+    color: var(--text-gray);
+}
+
+.price-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-gray);
+}
+
+.total-row {
+    padding-top: 15px;
+    margin-top: 10px;
+    border-top: 2px solid var(--neutral-light);
+}
+
+.total-row .price-label,
+.total-row .price-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-blue);
+}
+
+/* Payment status */
+.payment-status {
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.payment-status.paid {
+    background: var(--success-light);
+    color: var(--success-green);
+}
+
+.status-icon {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.primary-btn,
+.secondary-btn,
+.create-trip-btn {
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.primary-btn {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+.primary-btn:hover {
+    background: var(--soft-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(27, 59, 111, 0.3);
+}
+
+.create-trip-btn {
+    background: var(--accent-gold);
+    color: var(--white);
+}
+
+.create-trip-btn:hover {
+    background: #e0a021;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(249, 178, 51, 0.3);
+}
+
+.secondary-btn {
+    background: var(--white);
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+}
+
+.secondary-btn:hover {
+    background: var(--neutral-light);
+}
+
+.btn-icon {
+    font-size: 18px;
+}
+
+/* Email notice */
+.email-notice {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.email-notice p {
+    margin: 0;
+    color: var(--text-gray);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* --- footer --- */
+.footer-container {
+    background: var(--primary-blue);
+    color: var(--white);
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-link {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--accent-gold);
+}
+
+.footer-text {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.footer-text a {
+    color: var(--accent-gold);
+    text-decoration: none;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-bottom p {
+    margin: 5px 0;
+}
+
+/* --- responsive design --- */
+@media (max-width: 1024px) {
+    .details-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-summary-sidebar {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .confirmation-hero h1 {
+        font-size: 28px;
+    }
+
+    .confirmation-hero p {
+        font-size: 16px;
+    }
+
+    .success-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 36px;
+    }
+
+    .vehicle-info-display {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .vehicle-icon-large {
+        width: 100px;
+        height: 100px;
+        font-size: 60px;
+    }
+
+    .vehicle-name {
+        font-size: 24px;
+    }
+
+    .details-card {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+}
+
+/* --- print styles --- */
+@media print {
+    .navbar,
+    .action-buttons,
+    .footer-container {
+        display: none;
+    }
+
+    .details-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .confirmation-hero {
+        background: var(--white);
+        color: var(--text-gray);
+        border: 2px solid var(--success-green);
+    }
+
+    .success-icon {
+        border: 2px solid var(--success-green);
+    }
+}
