@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Cruiser - Booking Confirmation</title>
+    <link rel="stylesheet" href="bookingConfirmation.css">
+</head>
+
+<body>
+    <header>
+        <!--navigation bar-->
+        <nav class="navbar">
+
+            <div class="img-container">
+                <img src="campusCruiserLogo.png" class="nav-logo" alt="Campus Cruiser Logo" id="logo"
+                    onclick="location.href='home.html'">
+            </div>
+
+            <ul class="nav-link-container">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="browse-trips.html" class="nav-link">Browse Trips</a></li>
+                <li><a href="bookings.html" class="nav-link active">My Bookings</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+
+            <div class="menu-icon" id="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+        <!--confirmation hero-->
+        <section class="confirmation-hero">
+            <div class="success-icon">✓</div>
+            <h1>Booking Confirmed!</h1>
+            <p>Your vehicle reservation has been successfully confirmed.</p>
+            <p class="confirmation-number">Confirmation #: <span id="conf-number">CC-20251112-001</span></p>
+        </section>
+
+        <!--booking details container-->
+        <div class="details-wrapper">
+            
+            <!--main booking details-->
+            <section class="booking-details-section">
+                
+                <!--vehicle information-->
+                <div class="details-card">
+                    <h2 class="card-title">Vehicle Details</h2>
+                    <div class="vehicle-info-display">
+                        <div class="vehicle-icon-large" id="vehicle-icon">🚗</div>
+                        <div class="vehicle-info-text">
+                            <h3 class="vehicle-name" id="vehicle-name">Toyota Camry</h3>
+                            <p class="vehicle-specs" id="vehicle-specs">Sedan • 5 Seats</p>
+                            <div class="features-display" id="features-display">
+                                <span class="feature-tag">Bluetooth</span>
+                                <span class="feature-tag">Backup Camera</span>
+                                <span class="feature-tag">USB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--trip details-->
+                <div class="details-card">
+                    <h2 class="card-title">Trip Details</h2>
+                    <div class="trip-info-grid">
+                        <div class="info-row">
+                            <span class="info-icon">📍</span>
+                            <div class="info-content">
+                                <p class="info-label">Pickup Location</p>
+                                <p class="info-value" id="pickup-location">VSU Multi-Purpose Center</p>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">📅</span>
+                            <div class="info-content">
+                                <p class="info-label">Pickup Date & Time</p>
+                                <p class="info-value" id="pickup-datetime">Nov 27, 2025 at 3:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">📍</span>
+                            <div class="info-content">
+                                <p class="info-label">Dropoff Location</p>
+                                <p class="info-value" id="dropoff-location">VSU Multi-Purpose Center</p>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">🔄</span>
+                            <div class="info-content">
+                                <p class="info-label">Return Date & Time</p>
+                                <p class="info-value" id="return-datetime">Nov 27, 2025 at 11:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">👥</span>
+                            <div class="info-content">
+                                <p class="info-label">Number of Passengers</p>
+                                <p class="info-value" id="passengers">4 passengers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--important information-->
+                <div class="details-card info-card">
+                    <h2 class="card-title">Important Information</h2>
+                    <ul class="info-list">
+                        <li><strong>Valid Driver's License Required:</strong> You must present a valid driver's license at pickup.</li>
+                        <li><strong>Arrive Early:</strong> Please arrive 15 minutes before your scheduled pickup time.</li>
+                        <li><strong>Fuel Policy:</strong> Please return the vehicle with the same fuel level as pickup.</li>
+                        <li><strong>Cancellation Policy:</strong> Free cancellation up to 24 hours before pickup time.</li>
+                        <li><strong>Contact:</strong> For questions, call (804) 555-RIDE or email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b585e5b5b44595f6b484a465b5e5848595e42584e5905484446">[email&#160;protected]</a></li>
+                    </ul>
+                </div>
+
+            </section>
+
+            <!--sidebar summary-->
+            <aside class="booking-summary-sidebar">
+                
+                <!--price breakdown-->
+                <div class="summary-card">
+                    <h3 class="summary-title">Price Breakdown</h3>
+                    <div class="price-breakdown">
+                        <div class="price-row">
+                            <span class="price-label">Daily Rate</span>
+                            <span class="price-value" id="daily-rate">$45.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Number of Days</span>
+                            <span class="price-value" id="num-days">1</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Subtotal</span>
+                            <span class="price-value" id="subtotal">$45.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Service Fee</span>
+                            <span class="price-value" id="service-fee">$5.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Tax</span>
+                            <span class="price-value" id="tax">$3.50</span>
+                        </div>
+                        <div class="price-row total-row">
+                            <span class="price-label">Total</span>
+                            <span class="price-value total-value" id="total">$53.50</span>
+                        </div>
+                    </div>
+                    <div class="payment-status paid">
+                        <span class="status-icon">✓</span>
+                        <span>Payment Confirmed</span>
+                    </div>
+                </div>
+
+                <!--action buttons-->
+                <div class="action-buttons">
+                    <button class="primary-btn" onclick="window.print()">
+                        <span class="btn-icon">🖨️</span>
+                        Print Confirmation
+                    </button>
+                    <button class="create-trip-btn" id="create-trip-btn">
+                        <span class="btn-icon">👥</span>
+                        Create Group Trip
+                    </button>
+                    <button class="secondary-btn" onclick="location.href='bookings.html'">
+                        <span class="btn-icon">📋</span>
+                        View All Bookings
+                    </button>
+                    <button class="secondary-btn" onclick="location.href='home.html'">
+                        <span class="btn-icon">🏠</span>
+                        Back to Home
+                    </button>
+                </div>
+
+                <!--confirmation email notice-->
+                <div class="email-notice">
+                    <p>📧 A confirmation email has been sent to your registered email address.</p>
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <!--footer-->
+    <footer class="footer-container">
+        <div class="footer-content">
+            <!--quick links-->
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="#terms" class="footer-link">Terms of Service</a>
+                    <a href="#privacy" class="footer-link">Privacy Policy</a>
+                    <a href="contact" class="footer-link">Contact Us</a>
+                </div>
+            </div>
+
+            <!--social media-->
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="footer-links">
+                    <a href="https://www.facebook.com/CampusCruiser" class="footer-link">Facebook</a>
+                    <a href="https://www.twitter.com/CampusCruiser" class="footer-link">Twitter</a>
+                    <a href="https://www.instagram.com/CampusCruiser" class="footer-link">Instagram</a>
+                </div>
+            </div>
+
+            <!--contact info-->
+            <div class="footer-section">
+                <h4>Need Help?</h4>
+                <p class="footer-text">Email us at <a href="/cdn-cgi/l/email-protection#3e4d4b4e4e514c4a7e5d5f534e4b4d5d4c4b574d5b4c105d5153"><span class="__cf_email__" data-cfemail="394a4c4949564b4d795a5854494c4a5a4b4c504a5c4b175a5654">[email&#160;protected]</span></a></p>
+                <p class="footer-text">Call us: (804) 555-RIDE</p>
+            </div>
+        </div>
+
+        <!--footer bottom-->
+        <div class="footer-bottom">
+            <p>&copy; 2025 Campus Cruiser. All rights reserved.</p>
+            <p><small>coded with love by cam & co./small></p>        </div>
+    </footer>
+    <script src="bookingConfirmation.js"></script>
+</body>
+</html>
