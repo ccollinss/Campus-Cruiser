@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Cruiser - Review Booking</title>
+    <link rel="stylesheet" href="bookingReview.css">
+</head>
+
+<body>
+    <header>
+        <!--navigation bar-->
+        <nav class="navbar">
+
+            <div class="img-container">
+                <img src="campusCruiserLogo.png" class="nav-logo" alt="Campus Cruiser Logo" id="logo"
+                    onclick="location.href='home.html'">
+            </div>
+
+            <ul class="nav-link-container">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="browse-trips.html" class="nav-link">Browse Trips</a></li>
+                <li><a href="bookings.html" class="nav-link">My Bookings</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+
+            <div class="menu-icon" id="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+        <!--page header-->
+        <section class="page-header">
+            <h1>Review Your Booking</h1>
+            <p>Review the details before confirming your reservation</p>
+        </section>
+
+        <!--booking review container-->
+        <div class="review-wrapper">
+            
+            <!--main booking review-->
+            <section class="booking-review-section">
+                
+                <!--vehicle information-->
+                <div class="review-card">
+                    <h2 class="card-title">Vehicle Details</h2>
+                    <div class="vehicle-info-display">
+                        <div class="vehicle-icon-large" id="vehicle-icon">🚗</div>
+                        <div class="vehicle-info-text">
+                            <h3 class="vehicle-name" id="vehicle-name">Toyota Camry</h3>
+                            <p class="vehicle-specs" id="vehicle-specs">Sedan • 5 Seats</p>
+                            <div class="features-display" id="features-display">
+                                <span class="feature-tag">Bluetooth</span>
+                                <span class="feature-tag">Backup Camera</span>
+                                <span class="feature-tag">USB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--trip details-->
+                <div class="review-card">
+                    <h2 class="card-title">Trip Details</h2>
+                    <div class="trip-info-grid">
+                        <div class="info-row">
+                            <span class="info-icon">📍</span>
+                            <div class="info-content">
+                                <p class="info-label">Pickup Location</p>
+                                <p class="info-value" id="pickup-location">VSU Multi-Purpose Center</p>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">📅</span>
+                            <div class="info-content">
+                                <p class="info-label">Pickup Date & Time</p>
+                                <p class="info-value" id="pickup-datetime">Nov 27, 2025 at 3:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">📍</span>
+                            <div class="info-content">
+                                <p class="info-label">Return Location</p>
+                                <p class="info-value" id="return-location">VSU Multi-Purpose Center</p>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">🔄</span>
+                            <div class="info-content">
+                                <p class="info-label">Return Date & Time</p>
+                                <p class="info-value" id="return-datetime">Nov 27, 2025 at 11:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">👥</span>
+                            <div class="info-content">
+                                <p class="info-label">Number of Passengers</p>
+                                <p class="info-value" id="passengers">4 passengers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--group trip option-->
+                <div class="review-card option-card">
+                    <h2 class="card-title">Booking Option</h2>
+                    <div class="booking-options">
+                        <label class="option-label active" id="solo-option">
+                            <input type="radio" name="booking-type" value="solo" checked>
+                            <div class="option-content">
+                                <div class="option-header">
+                                    <span class="option-icon">👤</span>
+                                    <span class="option-title">Solo Rental</span>
+                                </div>
+                                <p class="option-description">Book the entire vehicle for yourself</p>
+                                <p class="option-next">→ Next: Complete payment</p>
+                                <p class="option-price">Total: <strong id="solo-price">$53.50</strong></p>
+                            </div>
+                        </label>
+
+                        <label class="option-label" id="group-option">
+                            <input type="radio" name="booking-type" value="group">
+                            <div class="option-content">
+                                <div class="option-header">
+                                    <span class="option-icon">👥</span>
+                                    <span class="option-title">Create Group Trip</span>
+                                </div>
+                                <p class="option-description">Share the ride and split the cost with others. You'll create a trip listing that others can join.</p>
+                                <p class="option-next">→ Next: Set up group trip details</p>
+                                <p class="option-price">Estimated per person: <strong id="group-price">$10.70</strong></p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+            </section>
+
+            <!--sidebar summary-->
+            <aside class="booking-summary-sidebar">
+                
+                <!--price breakdown-->
+                <div class="summary-card">
+                    <h3 class="summary-title">Price Summary</h3>
+                    <div class="price-breakdown">
+                        <div class="price-row">
+                            <span class="price-label">Daily Rate</span>
+                            <span class="price-value" id="daily-rate">$45.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Number of Days</span>
+                            <span class="price-value" id="num-days">1</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Subtotal</span>
+                            <span class="price-value" id="subtotal">$45.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Service Fee</span>
+                            <span class="price-value" id="service-fee">$5.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Tax</span>
+                            <span class="price-value" id="tax">$3.50</span>
+                        </div>
+                        <div class="price-row total-row">
+                            <span class="price-label">Total</span>
+                            <span class="price-value total-value" id="total">$53.50</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--action buttons-->
+                <div class="action-buttons">
+                    <button class="primary-btn" id="pay-now-btn">
+                        Pay Now
+                    </button>
+                    <button class="group-trip-btn" id="create-group-btn">
+                        <span class="btn-icon">👥</span>
+                        Create Group Trip
+                    </button>
+                    <button class="secondary-btn" onclick="history.back()">
+                        Back to Vehicles
+                    </button>
+                </div>
+
+                <!--info notice-->
+                <div class="info-notice">
+                    <p>💡 You can cancel for free up to 24 hours before pickup.</p>
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <!--footer-->
+    <footer class="footer-container">
+        <div class="footer-content">
+            <!--quick links-->
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="#terms" class="footer-link">Terms of Service</a>
+                    <a href="#privacy" class="footer-link">Privacy Policy</a>
+                    <a href="contact" class="footer-link">Contact Us</a>
+                </div>
+            </div>
+
+            <!--social media-->
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="footer-links">
+                    <a href="https://www.facebook.com/CampusCruiser" class="footer-link">Facebook</a>
+                    <a href="https://www.twitter.com/CampusCruiser" class="footer-link">Twitter</a>
+                    <a href="https://www.instagram.com/CampusCruiser" class="footer-link">Instagram</a>
+                </div>
+            </div>
+
+            <!--contact info-->
+            <div class="footer-section">
+                <h4>Need Help?</h4>
+                <p class="footer-text">Email us at <a href="/cdn-cgi/l/email-protection#295a5c5959465b5d694a4844595c5a4a5b5c405a4c5b074a4644"><span class="__cf_email__" data-cfemail="a8dbddd8d8c7dadce8cbc9c5d8dddbcbdaddc1dbcdda86cbc7c5">[email&#160;protected]</span></a></p>
+                <p class="footer-text">Call us: (804) 555-RIDE</p>
+            </div>
+        </div>
+
+        <!--footer bottom-->
+        <div class="footer-bottom">
+            <p>&copy; 2025 Campus Cruiser. All rights reserved.</p>
+            <p><small>coded with love by cam & co./small></p>
+        </div>
+    </footer>
+    <script src="bookingReview.js" defer></script>
+</body>
+</html>
