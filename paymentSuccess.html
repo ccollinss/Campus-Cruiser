@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - Campus Cruiser</title>
+    <link rel="stylesheet" href="paymentSuccess.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="img-container">
+                <img src="campusCruiserLogo.png" class="nav-logo" alt="Campus Cruiser Logo"
+                     onclick="location.href='home.html'">
+            </div>
+
+            <ul class="nav-link-container">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="browse-trips.html" class="nav-link">Browse Trips</a></li>
+                <li><a href="bookings.php" class="nav-link">My Bookings</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+
+            <div class="menu-icon">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Success message -->
+    <section class="success-section">
+        <div class="success-card">
+
+            <div class="checkmark">✔</div>
+
+            <h1>Payment Successful!</h1>
+            <p>Your booking has been confirmed.</p>
+
+            <div class="summary-box">
+                <h2>Booking Summary</h2>
+
+                <p><strong>Vehicle:</strong> <span id="summary-vehicle"></span></p>
+                <p><strong>Pickup:</strong> <span id="summary-pickup"></span></p>
+                <p><strong>Return:</strong> <span id="summary-return"></span></p>
+                <p><strong>Total Paid:</strong> <span id="summary-price" class="highlight"></span></p>
+            </div>
+
+            <div class="action-buttons">
+                <button onclick="location.href='bookings.php'" class="btn-primary">View My Bookings</button>
+                <button onclick="location.href='home.html'" class="btn-secondary">Return Home</button>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="paymentSuccess.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Cruiser - Payment</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="img-container">
+            <img src="campusCruiserLogo.png" class="nav-logo" alt="Campus Cruiser Logo"
+                 onclick="location.href='home.html'">
+        </div>
+        <ul class="nav-link-container">
+            <li><a href="home.html" class="nav-link">Home</a></li>
+            <li><a href="searchVehicle.html" class="nav-link">Browse Trips</a></li>
+            <li><a href="bookings.php" class="nav-link">My Bookings</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="payment-main">
+    <section class="payment-card">
+        <h1>Complete Your Payment</h1>
+        <p id="trip-summary">Loading trip details...</p>
+
+        <!-- SOLO + GROUP both post here, but we only *use* solo in this restored version -->
+        <form action="process_payment.php" method="POST" class="payment-form">
+
+            <!-- (optional future use) -->
+            <input type="hidden" name="group_trip_id" id="group_trip_id">
+
+            <h2>Your Information</h2>
+
+            <label>
+                Student Full Name
+                <input type="text" name="student_name" id="student_name" required>
+            </label>
+
+            <label>
+                Student ID
+                <input type="text" name="student_id" id="student_id" required>
+            </label>
+
+            <!-- Trip details passed from bookingReview.js -->
+            <input type="hidden" name="vehicle" id="vehicle">
+            <input type="hidden" name="price" id="price">
+            <input type="hidden" name="pickup" id="pickup">
+            <input type="hidden" name="dropoff" id="dropoff">
+            <input type="hidden" name="departure_date" id="departure_date">
+            <input type="hidden" name="departure_time" id="departure_time">
+            <input type="hidden" name="return_date" id="return_date">
+            <input type="hidden" name="return_time" id="return_time">
+
+            <h2>Payment Details</h2>
+
+            <label>
+                Cardholder Name
+                <input type="text" name="card_name" required>
+            </label>
+
+            <label>
+                Card Number
+                <input type="text" name="card_number" minlength="16" maxlength="16" required>
+            </label>
+
+            <div class="inline-fields">
+                <label>
+                    Expiration (MM/YY)
+                    <input type="text" name="card_exp" minlength="5" maxlength="5"
+                           placeholder="12/27" required>
+                </label>
+                <label>
+                    CVV
+                    <input type="text" name="card_cvv" minlength="3" maxlength="4" required>
+                </label>
+            </div>
+
+            <label>
+                Payment Method
+                <select name="payment_method" required>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Debit Card">Debit Card</option>
+                </select>
+            </label>
+
+            <button type="submit" class="primary-btn">Pay Now</button>
+        </form>
+    </section>
+</main>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    const vehicle = params.get('vehicle') || 'Vehicle';
+    const price   = params.get('price') || '0';
+    const pickup  = params.get('pickup') || '';
+    const dropoff = params.get('dropoff') || '';
+    const depDate = params.get('departure-date') || '';
+    const depTime = params.get('departure-time') || '';
+    const retDate = params.get('return-date') || '';
+    const retTime = params.get('return-time') || '';
+
+    // (for future group-trip use; empty for normal bookings)
+    const groupTripId = params.get('group_trip_id') || '';
+    document.getElementById('group_trip_id').value = groupTripId;
+
+    document.getElementById('vehicle').value = vehicle;
+    document.getElementById('price').value   = price;
+    document.getElementById('pickup').value  = pickup;
+    document.getElementById('dropoff').value = dropoff;
+    document.getElementById('departure_date').value = depDate;
+    document.getElementById('departure_time').value = depTime;
+    document.getElementById('return_date').value    = retDate;
+    document.getElementById('return_time').value    = retTime;
+
+    document.getElementById('trip-summary').textContent =
+        `${vehicle} • ${pickup} → ${dropoff} • Total: $${parseFloat(price).toFixed(2)}`;
+</script>
+
+</body>
+</html>

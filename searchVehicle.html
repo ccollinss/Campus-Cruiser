@@ -20,8 +20,8 @@
 
             <ul class="nav-link-container">
                 <li><a href="home.html" class="nav-link">Home</a></li>
-                <li><a href="browse-trips.html" class="nav-link">Browse Trips</a></li>
-                <li><a href="bookings.html" class="nav-link">My Bookings</a></li>
+                <li><a href="searchVehicle.html" class="nav-link">Browse Trips</a></li>
+                <li><a href="bookings.php" class="nav-link">My Bookings</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
             </ul>
 
@@ -52,15 +52,23 @@
                 <!--summary details-->
                 <div class="summary-content" id="summary-content">
                     <div class="summary-item">
-                        <span class="summary-label">📍 Route:</span>
-                        <span class="summary-value" id="summary-route">VSU Multi-Purpose Center → Richmond, VA</span>
+                        <span class="summary-label">📍 Outbound Route:</span>
+                        <span class="summary-value" id="summary-route">
+                            Leaving from: VSU Multi-Purpose Center → Going to: Richmond, VA
+                        </span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">🔄 Return Route:</span>
+                        <span class="summary-value" id="summary-return-route">
+                            Leaving from: Richmond, VA → Return to: VSU Multi-Purpose Center
+                        </span>
                     </div>
                     <div class="summary-item">
                         <span class="summary-label">📅 Departure:</span>
                         <span class="summary-value" id="summary-departure">Nov 15, 2025 at 10:00 AM</span>
                     </div>
                     <div class="summary-item">
-                        <span class="summary-label">🔄 Return:</span>
+                        <span class="summary-label">📅 Return:</span>
                         <span class="summary-value" id="summary-return">Nov 17, 2025 at 6:00 PM</span>
                     </div>
                     <div class="summary-item">
@@ -73,11 +81,11 @@
                 <div class="summary-edit-form hidden" id="summary-edit-form">
                     <div class="edit-form-row">
                         <div class="edit-form-group">
-                            <label class="edit-label">Departure Address</label>
+                            <label class="edit-label">Pickup Location (Leaving from)</label>
                             <input type="text" class="edit-input" id="edit-departure-address" placeholder="e.g., VSU Multi-Purpose Center">
                         </div>
                         <div class="edit-form-group">
-                            <label class="edit-label">Return Address</label>
+                            <label class="edit-label">Destination (Going to)</label>
                             <input type="text" class="edit-input" id="edit-return-address" placeholder="e.g., Richmond, VA">
                         </div>
                     </div>
@@ -541,7 +549,7 @@
                 <div class="footer-links">
                     <a href="#terms" class="footer-link">Terms of Service</a>
                     <a href="#privacy" class="footer-link">Privacy Policy</a>
-                    <a href="contact" class="footer-link">Contact Us</a>
+                    <a href="contact.html" class="footer-link">Contact Us</a>
                 </div>
             </div>
 

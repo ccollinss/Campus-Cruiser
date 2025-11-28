@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Campus Cruiser</title>
+    <link rel="stylesheet" href="contact.css">
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="img-container">
+            <img src="campusCruiserLogo.png" class="nav-logo" onclick="location.href='home.html'">
+        </div>
+
+        <ul class="nav-link-container">
+            <li><a href="home.html" class="nav-link">Home</a></li>
+            <li><a href="searchVehicle.html" class="nav-link">Browse Trips</a></li>
+            <li><a href="bookings.php" class="nav-link">My Bookings</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="contact-main">
+
+    <section class="contact-header">
+        <h1>Contact Campus Cruiser</h1>
+        <p>We're here to help! Reach out with any questions or concerns.</p>
+    </section>
+
+    <section class="contact-container">
+
+        <div class="contact-info">
+            <h2>Support Information</h2>
+            <p><strong>Email:</strong> support@campuscruiser.com</p>
+            <p><strong>Phone:</strong> (804) 555-RIDE</p>
+            <p><strong>Hours:</strong> Mon–Fri • 9 AM – 6 PM</p>
+        </div>
+
+        <form class="contact-form" action="contact_submit.php" method="POST">
+            <h2>Send Us a Message</h2>
+
+            <label>Your Name</label>
+            <input type="text" name="name" placeholder="Your Name" required>
+
+            <label>Your Email</label>
+            <input type="email" name="email" placeholder="you@example.com" required>
+
+            <label>Your Message</label>
+            <textarea name="message" placeholder="Write your message here..." required></textarea>
+
+            <button type="submit" class="send-btn">Send Message</button>
+        </form>
+
+    </section>
+
+</main>
+
+<footer class="footer-container">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <a href="#" class="footer-link">Terms of Service</a>
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="contact.html" class="footer-link">Contact Us</a>
+        </div>
+
+        <div class="footer-section">
+            <h4>Connect</h4>
+            <a href="#" class="footer-link">Facebook</a>
+            <a href="#" class="footer-link">Twitter</a>
+            <a href="#" class="footer-link">Instagram</a>
+        </div>
+
+        <div class="footer-section">
+            <h4>Need Help?</h4>
+            <p>Email us at support@campuscruiser.com</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

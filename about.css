@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f8f8;
+    color: #1e2a5a;
+}
+
+/* Header */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #1e2a5a;
+    color: white;
+}
+
+.nav-link-container {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.nav-link.active {
+    border-bottom: 2px solid #ffcc00;
+}
+
+/* About Page */
+.about-main {
+    padding: 50px 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.about-header h1 {
+    font-size: 2.2rem;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.about-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.about-card h2 {
+    margin-bottom: 10px;
+}
+
+.about-list {
+    padding-left: 20px;
+}
+
+/* Footer */
+.footer-container {
+    background-color: #1e2a5a;
+    color: white;
+    padding: 40px 20px;
+}
+
+.footer-section {
+    margin-bottom: 20px;
+}
+
+.footer-link {
+    display: block;
+    color: #ddd;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+}

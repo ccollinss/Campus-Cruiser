@@ -20,8 +20,8 @@
 
             <ul class="nav-link-container">
                 <li><a href="home.html" class="nav-link">Home</a></li>
-                <li><a href="browse-trips.html" class="nav-link">Browse Trips</a></li>
-                <li><a href="bookings.html" class="nav-link">My Bookings</a></li>
+                <li><a href="searchVehicle.html" class="nav-link">Browse Trips</a></li>
+                <li><a href="bookings.php" class="nav-link">My Bookings</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
             </ul>
 
@@ -86,7 +86,7 @@
                             <span class="info-icon">📍</span>
                             <div class="info-content">
                                 <p class="info-label">Return Location</p>
-                                <p class="info-value" id="return-location">VSU Multi-Purpose Center</p>
+                                <p class="info-value" id="dropoff-location">VSU Multi-Purpose Center</p>
                             </div>
                         </div>
                         <div class="info-row">
@@ -174,6 +174,13 @@
                     </div>
                 </div>
 
+                <!-- NEW: student id -->
+                <div class="summary-card">
+                    <h3 class="summary-title">Your Info</h3>
+                    <label for="student-id" class="student-label">Student ID</label>
+                    <input type="text" id="student-id" class="student-input" placeholder="e.g., V1234" required>
+                </div>
+
                 <!--action buttons-->
                 <div class="action-buttons">
                     <button class="primary-btn" id="pay-now-btn">
@@ -207,7 +214,7 @@
                 <div class="footer-links">
                     <a href="#terms" class="footer-link">Terms of Service</a>
                     <a href="#privacy" class="footer-link">Privacy Policy</a>
-                    <a href="contact" class="footer-link">Contact Us</a>
+                    <a href="contact.html" class="footer-link">Contact Us</a>
                 </div>
             </div>
 
@@ -224,7 +231,7 @@
             <!--contact info-->
             <div class="footer-section">
                 <h4>Need Help?</h4>
-                <p class="footer-text">Email us at <a href="/cdn-cgi/l/email-protection#295a5c5959465b5d694a4844595c5a4a5b5c405a4c5b074a4644"><span class="__cf_email__" data-cfemail="a8dbddd8d8c7dadce8cbc9c5d8dddbcbdaddc1dbcdda86cbc7c5">[email&#160;protected]</span></a></p>
+                <p class="footer-text">Email us at <a href="mailto:support@campuscruiser.com">support@campuscruiser.com</a></p>
                 <p class="footer-text">Call us: (804) 555-RIDE</p>
             </div>
         </div>
@@ -232,9 +239,10 @@
         <!--footer bottom-->
         <div class="footer-bottom">
             <p>&copy; 2025 Campus Cruiser. All rights reserved.</p>
-            <p><small>coded with love by cam & co./small></p>
+            <p><small>coded with love by cam & co.</small></p>
         </div>
     </footer>
+
     <script src="bookingReview.js" defer></script>
 </body>
 </html>
