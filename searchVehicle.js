@@ -3,6 +3,8 @@ function getUrlParams() {
     return {
         departureAddress: params.get('departure-address') || 'VSU Multi-Purpose Center',
         returnAddress: params.get('return-address') || 'Richmond, VA',
+        returnPickup: params.get('return-pickup') || '',
+        returnDropoff: params.get('return-dropoff') || '',
         departureDate: params.get('departure-date') || '',
         departureTime: params.get('departure-time') || '',
         returnDate: params.get('return-date') || '',
@@ -29,37 +31,54 @@ function formatTime(timeString) {
 
 function initializeSearchSummary() {
     const params = getUrlParams();
-    
-    const outboundRouteText = `Leaving from: ${params.departureAddress} → Going to: ${params.returnAddress}`;
+
+    const departureAddress = params.departureAddress || 'VSU Multi-Purpose Center';
+    const baseReturnAddress = params.returnAddress || departureAddress;
+
+    const returnPickup = params.returnPickup || baseReturnAddress;
+
+    const returnDropoff = params.returnDropoff || departureAddress;
+
+    const outboundRouteText =
+        `Leaving from: ${departureAddress} → Going to: ${baseReturnAddress}`;
     document.getElementById('summary-route').textContent = outboundRouteText;
 
-    const returnRouteText = `Leaving from: ${params.returnAddress} → Return to: ${params.departureAddress}`;
+    const returnRouteText =
+        `Leaving from: ${returnPickup} → Return to: ${returnDropoff}`;
     const returnRouteEl = document.getElementById('summary-return-route');
     if (returnRouteEl) {
         returnRouteEl.textContent = returnRouteText;
     }
-    
-    const departureDisplay = params.departureDate 
+
+    document.getElementById('summary-return-pickup').textContent = returnPickup;
+    document.getElementById('summary-return-dropoff').textContent = returnDropoff;
+
+    const departureDisplay = params.departureDate
         ? `${formatDate(params.departureDate)}${params.departureTime ? ' at ' + formatTime(params.departureTime) : ''}`
         : 'Not specified';
     document.getElementById('summary-departure').textContent = departureDisplay;
-    
-    const returnDisplay = params.returnDate 
+
+    const returnDisplay = params.returnDate
         ? `${formatDate(params.returnDate)}${params.returnTime ? ' at ' + formatTime(params.returnTime) : ''}`
         : 'Not specified';
     document.getElementById('summary-return').textContent = returnDisplay;
-    
-    document.getElementById('summary-seats').textContent = 
+
+    // ---- SEATS ----
+    document.getElementById('summary-seats').textContent =
         `${params.seats} ${parseInt(params.seats) === 1 ? 'passenger' : 'passengers'}`;
-    
-    document.getElementById('edit-departure-address').value = params.departureAddress;
-    document.getElementById('edit-return-address').value = params.returnAddress;
+
+    // ---- EDIT FORM FIELDS ----
+    document.getElementById('edit-departure-address').value = departureAddress;
+    document.getElementById('edit-return-address').value = baseReturnAddress;
     document.getElementById('edit-departure-date').value = params.departureDate;
     document.getElementById('edit-departure-time').value = params.departureTime;
     document.getElementById('edit-return-date').value = params.returnDate;
     document.getElementById('edit-return-time').value = params.returnTime;
     document.getElementById('edit-seats').value = params.seats;
+    document.getElementById('edit-return-pickup').value = returnPickup;
+    document.getElementById('edit-return-dropoff').value = returnDropoff;
 }
+
 
 document.getElementById('edit-search-btn').addEventListener('click', function() {
     document.getElementById('summary-content').classList.add('hidden');
@@ -80,6 +99,8 @@ document.getElementById('save-search-btn').addEventListener('click', function() 
     const newParams = {
         departureAddress: document.getElementById('edit-departure-address').value,
         returnAddress: document.getElementById('edit-return-address').value,
+        returnPickup: document.getElementById('edit-return-pickup')?.value || '',
+        returnDropoff: document.getElementById('edit-return-dropoff')?.value || '',
         departureDate: document.getElementById('edit-departure-date').value,
         departureTime: document.getElementById('edit-departure-time').value,
         returnDate: document.getElementById('edit-return-date').value,
@@ -95,7 +116,10 @@ document.getElementById('save-search-btn').addEventListener('click', function() 
     if (returnRouteEl) {
         returnRouteEl.textContent = returnRouteText;
     }
-    
+
+    document.getElementById('summary-return-pickup').textContent = newParams.returnPickup;
+    document.getElementById('summary-return-dropoff').textContent = newParams.returnDropoff;
+
     const departureDisplay = newParams.departureDate 
         ? `${formatDate(newParams.departureDate)}${newParams.departureTime ? ' at ' + formatTime(newParams.departureTime) : ''}`
         : 'Not specified';
@@ -112,11 +136,14 @@ document.getElementById('save-search-btn').addEventListener('click', function() 
     const url = new URL(window.location);
     url.searchParams.set('departure-address', newParams.departureAddress);
     url.searchParams.set('return-address', newParams.returnAddress);
+    url.searchParams.set('return-pickup', newParams.returnPickup);
+    url.searchParams.set('return-dropoff', newParams.returnDropoff);
     url.searchParams.set('departure-date', newParams.departureDate);
     url.searchParams.set('departure-time', newParams.departureTime);
     url.searchParams.set('return-date', newParams.returnDate);
     url.searchParams.set('return-time', newParams.returnTime);
     url.searchParams.set('seats', newParams.seats);
+
     window.history.pushState({}, '', url);
     
     document.getElementById('summary-content').classList.remove('hidden');
@@ -274,6 +301,8 @@ document.querySelectorAll('.book-btn').forEach(button => {
             '&features=' + encodeURIComponent(features) +
             '&departure-address=' + encodeURIComponent(searchParams.departureAddress) +
             '&return-address=' + encodeURIComponent(searchParams.returnAddress) +
+            '&return-pickup=' + encodeURIComponent(searchParams.returnPickup || '') +
+            '&return-dropoff=' + encodeURIComponent(searchParams.returnDropoff || '') +
             '&departure-date=' + encodeURIComponent(searchParams.departureDate) +
             '&departure-time=' + encodeURIComponent(searchParams.departureTime) +
             '&return-date=' + encodeURIComponent(searchParams.returnDate) +

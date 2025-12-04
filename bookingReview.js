@@ -18,6 +18,8 @@ function getUrlParams() {
         vehicleFeatures: params.get('features') || 'Bluetooth,Backup Camera,USB',
         departureAddress: params.get('departure-address') || 'VSU Multi-Purpose Center',
         returnAddress: params.get('return-address') || 'VSU Multi-Purpose Center',
+        returnPickup: params.get('return-pickup') || '',
+        returnDropoff: params.get('return-dropoff') || '',
         departureDate: params.get('departure-date') || '',
         departureTime: params.get('departure-time') || '',
         returnDate: params.get('return-date') || '',
@@ -92,6 +94,13 @@ function initializeConfirmation() {
     // Trip details
     document.getElementById('pickup-location').textContent = params.departureAddress;
     document.getElementById('dropoff-location').textContent = params.returnAddress;
+    document.getElementById('return-pickup').textContent =
+        params.returnPickup || params.returnAddress;
+    document.getElementById('return-dropoff').textContent =
+        params.returnDropoff || params.departureAddress;
+    
+
+    
 
     document.getElementById('pickup-datetime').textContent =
         params.departureDate
@@ -121,7 +130,6 @@ function initializeConfirmation() {
     document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
     document.getElementById('total').textContent = `$${total.toFixed(2)}`;
 
-    // also fill solo + group hints
     document.getElementById('solo-price').textContent = `$${total.toFixed(2)}`;
     const perPerson = total / (parseInt(params.passengers, 10) || 1);
     document.getElementById('group-price').textContent = `$${perPerson.toFixed(2)}`;
@@ -141,6 +149,8 @@ document.getElementById('create-group-btn').addEventListener('click', () => {
         '&features=' + encodeURIComponent(params.vehicleFeatures) +
         '&departure-address=' + encodeURIComponent(params.departureAddress) +
         '&return-address=' + encodeURIComponent(params.returnAddress) +
+        '&return-pickup=' + encodeURIComponent(params.returnPickup) +
+        '&return-dropoff=' + encodeURIComponent(params.returnDropoff) +    
         '&departure-date=' + encodeURIComponent(params.departureDate) +
         '&departure-time=' + encodeURIComponent(params.departureTime) +
         '&return-date=' + encodeURIComponent(params.returnDate) +
@@ -149,6 +159,39 @@ document.getElementById('create-group-btn').addEventListener('click', () => {
 
     window.location.href = url;
 });
+
+function updatePriceSummary(mode) {
+    const subtotal = parseFloat(document.getElementById("subtotal").textContent.replace('$',''));
+    const service = parseFloat(document.getElementById("service-fee").textContent.replace('$',''));
+    const tax = parseFloat(document.getElementById("tax").textContent.replace('$',''));
+
+    const fullTotal = subtotal + service + tax;
+    const passengersText = document.getElementById('passengers').textContent;
+    const passengers = parseInt(passengersText) || 1;
+
+    if (mode === "solo") {
+        document.getElementById("total").textContent = `$${fullTotal.toFixed(2)}`;
+        document.getElementById("solo-option").classList.add("active");
+        document.getElementById("group-option").classList.remove("active");
+    }
+
+    if (mode === "group") {
+        const each = fullTotal / passengers;
+        document.getElementById("total").textContent = `$${each.toFixed(2)}`;
+        document.getElementById("group-option").classList.add("active");
+        document.getElementById("solo-option").classList.remove("active");
+    }
+}
+
+document.getElementById("solo-option").addEventListener("click", () => {
+    updatePriceSummary("solo");
+});
+
+document.getElementById("group-option").addEventListener("click", () => {
+    updatePriceSummary("group");
+});
+
+
 
 // ===== PAY NOW BUTTON =====
 document.getElementById('pay-now-btn').addEventListener('click', () => {

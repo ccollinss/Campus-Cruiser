@@ -5,7 +5,6 @@ ini_set('display_errors', 1);
 require 'db_config.php';
 
 // For now, show ALL bookings.
-// Later you could filter by logged-in student_id.
 $sql = "SELECT * FROM bookings ORDER BY created_at DESC";
 $result = $conn->query($sql);
 ?>
@@ -47,6 +46,7 @@ $result = $conn->query($sql);
                     <th>Vehicle</th>
                     <th>Pickup</th>
                     <th>Return</th>
+                    <th>Trip Type</th> <!-- <-- NEW COLUMN -->
                     <th>Total Paid</th>
                     <th>Created</th>
                 </tr>
@@ -56,18 +56,35 @@ $result = $conn->query($sql);
                     <tr>
                         <td><?php echo htmlspecialchars($row['id']); ?></td>
                         <td><?php echo htmlspecialchars($row['vehicle_name']); ?></td>
+
                         <td>
                             <?php
                             echo htmlspecialchars($row['pickup_location']) . "<br>";
                             echo htmlspecialchars($row['pickup_datetime']);
                             ?>
                         </td>
+
                         <td>
                             <?php
                             echo htmlspecialchars($row['dropoff_location']) . "<br>";
                             echo htmlspecialchars($row['return_datetime']);
                             ?>
                         </td>
+
+                        <!-- NEW TRIP TYPE COLUMN -->
+                        <td>
+                            <?php
+                            // Show readable format
+                            if (!empty($row['trip_type'])) {
+                                echo ($row['trip_type'] === "one-way")
+                                    ? "One-Way Trip"
+                                    : "Round Trip";
+                            } else {
+                                echo "Round Trip"; // default for older bookings
+                            }
+                            ?>
+                        </td>
+
                         <td>$<?php echo number_format($row['total_price'], 2); ?></td>
                         <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                     </tr>
@@ -82,6 +99,7 @@ $result = $conn->query($sql);
 
 </body>
 </html>
+
 <?php
 $conn->close();
 ?>

@@ -145,9 +145,12 @@ nav {
 
 .summary-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+    row-gap: 15px;
+    align-items: start;
 }
+
 
 .summary-item {
     display: flex;

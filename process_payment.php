@@ -8,12 +8,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die("Invalid request.");
 }
 
-// Basic student + trip info (solo flow)
 $student_id     = $_POST['student_id'] ?? '';
 $student_name   = $_POST['student_name'] ?? '';
+$group_trip_id  = $_POST['group_trip_id'] ?? null; 
+$is_group       = $_POST['is_group'] ?? 0;
 
 $vehicle        = $_POST['vehicle'] ?? '';
 $price          = $_POST['price'] ?? '0';
+$group_trip_id  = $_POST['group_trip_id'] ?? null;
 $pickup         = $_POST['pickup'] ?? '';
 $dropoff        = $_POST['dropoff'] ?? '';
 $dep_date       = $_POST['departure_date'] ?? '';
@@ -23,22 +25,22 @@ $ret_time       = $_POST['return_time'] ?? '';
 
 $payment_method = $_POST['payment_method'] ?? 'Credit Card';
 
-// Validate required fields for a normal booking
+// Determine trip type
+$trip_type = ($ret_date === '' || $ret_time === '') ? 'one-way' : 'round-trip';
+
 if ($student_id === '' || $student_name === '' || $vehicle === '' || $pickup === '' || $dropoff === '') {
     die("Missing required booking information.");
 }
 
-// Build datetime strings
 $pickup_dt = $dep_date . ' ' . ($dep_time ?: '00:00:00');
-$return_dt = $ret_date . ' ' . ($ret_time ?: '00:00:00');
+$return_dt = ($ret_date !== '' ? ($ret_date . ' ' . ($ret_time ?: '00:00:00')) : null);
 
 $total_price = floatval($price);
 
-// ===== INSERT INTO bookings (no group_trip_id here) =====
 $booking_sql = "
     INSERT INTO bookings 
-    (student_id, student_name, vehicle_name, pickup_location, dropoff_location, pickup_datetime, return_datetime, total_price)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    (student_id, student_name, vehicle_name, pickup_location, dropoff_location, pickup_datetime, return_datetime, total_price, trip_type)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 ";
 
 $booking_stmt = $conn->prepare($booking_sql);
@@ -47,7 +49,7 @@ if (!$booking_stmt) {
 }
 
 $booking_stmt->bind_param(
-    "sssssssd",
+    "sssssssds",
     $student_id,
     $student_name,
     $vehicle,
@@ -55,7 +57,8 @@ $booking_stmt->bind_param(
     $dropoff,
     $pickup_dt,
     $return_dt,
-    $total_price
+    $total_price,
+    $trip_type
 );
 
 if (!$booking_stmt->execute()) {
@@ -65,7 +68,6 @@ if (!$booking_stmt->execute()) {
 $booking_id = $booking_stmt->insert_id;
 $booking_stmt->close();
 
-// ===== INSERT INTO payments =====
 $payment_sql = "
     INSERT INTO payments (booking_id, amount, payment_method, status)
     VALUES (?, ?, ?, 'Completed')
@@ -84,10 +86,121 @@ if (!$payment_stmt->execute()) {
     die("Error inserting payment: " . $payment_stmt->error);
 }
 
+if ($is_group && $group_trip_id) {
+
+    $member_sql = "
+        INSERT INTO group_trip_members (group_trip_id, student_id, student_name)
+        VALUES (?, ?, ?)
+    ";
+
+    $member_stmt = $conn->prepare($member_sql);
+    if (!$member_stmt) {
+        die("Member insert failed: " . $conn->error);
+    }
+
+    $member_stmt->bind_param("iss", $group_trip_id, $student_id, $student_name);
+    $member_stmt->execute();
+    $member_stmt->close();
+
+    $update_sql = "
+        UPDATE group_trips
+        SET seats_taken = seats_taken + 1
+        WHERE id = ?
+    ";
+
+    $update_stmt = $conn->prepare($update_sql);
+    if (!$update_stmt) {
+        die("Seat update failed: " . $conn->error);
+    }
+
+    $update_stmt->bind_param("i", $group_trip_id);
+    $update_stmt->execute();
+    $update_stmt->close();
+}
+
+
 $payment_stmt->close();
+if (!empty($group_trip_id)) {
+
+    $member_sql = "
+        INSERT INTO group_trip_members (group_trip_id, student_id, student_name)
+        VALUES (?, ?, ?)
+    ";
+
+    $member_stmt = $conn->prepare($member_sql);
+
+    if ($member_stmt) {
+        $member_stmt->bind_param("iss", $group_trip_id, $student_id, $student_name);
+        $member_stmt->execute();
+        $member_stmt->close();
+    }
+
+    $update_sql = "
+        UPDATE group_trips
+        SET seats_taken = seats_taken + 1
+        WHERE id = ?
+    ";
+
+    $update_stmt = $conn->prepare($update_sql);
+
+    if ($update_stmt) {
+        $update_stmt->bind_param("i", $group_trip_id);
+        $update_stmt->execute();
+        $update_stmt->close();
+    }
+}
+
+
+if (!empty($group_trip_id)) {
+
+    $member_sql = "
+        INSERT INTO group_trip_members (group_trip_id, student_id, student_name)
+        VALUES (?, ?, ?)
+    ";
+
+    $member_stmt = $conn->prepare($member_sql);
+
+    if ($member_stmt) {
+        $member_stmt->bind_param("iss", $group_trip_id, $student_id, $student_name);
+        $member_stmt->execute();
+        $member_stmt->close();
+    }
+
+    $update_sql = "
+        UPDATE group_trips
+        SET seats_taken = seats_taken + 1
+        WHERE id = ?
+    ";
+
+    $update_stmt = $conn->prepare($update_sql);
+
+    if ($update_stmt) {
+        $update_stmt->bind_param("i", $group_trip_id);
+        $update_stmt->execute();
+        $update_stmt->close();
+    }
+}
+if (isset($_POST['group_trip_id']) && $_POST['is_group'] == "1") {
+    $group_trip_id = intval($_POST['group_trip_id']);
+
+    // Update seats_taken
+    $update_sql = "UPDATE group_trips SET seats_taken = seats_taken + 1 WHERE id = ?";
+    $update_stmt = $conn->prepare($update_sql);
+    $update_stmt->bind_param("i", $group_trip_id);
+    $update_stmt->execute();
+    $update_stmt->close();
+
+    // Insert member record
+    $member_sql = "INSERT INTO group_trip_members (group_trip_id, student_id, student_name) VALUES (?, ?, ?)";
+    $member_stmt = $conn->prepare($member_sql);
+    $member_stmt->bind_param("iss", $group_trip_id, $student_id, $student_name);
+    $member_stmt->execute();
+    $member_stmt->close();
+}
+
+
 $conn->close();
 
-// ===== Redirect to success page with ALL the details (what you had before) =====
 $redirect_url = "paymentSuccess.html" .
     "?vehicle=" . urlencode($vehicle) .
     "&price=" . urlencode(number_format($total_price, 2, '.', '')) .
@@ -96,9 +209,9 @@ $redirect_url = "paymentSuccess.html" .
     "&departure-date=" . urlencode($dep_date) .
     "&departure-time=" . urlencode($dep_time) .
     "&return-date=" . urlencode($ret_date) .
-    "&return-time=" . urlencode($ret_time);
+    "&return-time=" . urlencode($ret_time) .
+    "&trip-type=" . urlencode($trip_type);
 
 header("Location: $redirect_url");
 exit;
 ?>
-    

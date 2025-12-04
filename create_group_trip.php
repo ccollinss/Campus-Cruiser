@@ -33,6 +33,10 @@ $vehicle_price    = $_POST['vehicle_price'] ?? null;
 $departure_address = $_POST['departure_address'] ?? null;
 $destination       = $_POST['destination'] ?? null;
 
+$return_pickup = $_POST['return_pickup'] ?? null;
+$return_dropoff = $_POST['return_dropoff'] ?? null;
+
+
 $departure_date    = $_POST['departure_date'] ?? '';
 $departure_time    = $_POST['departure_time'] ?? '';
 $return_date       = $_POST['return_date'] ?? '';
@@ -53,9 +57,11 @@ $return_datetime    = build_datetime($return_date, $return_time);
 $trip_code = strtoupper(substr(md5(uniqid("", true)), 0, 8));
 
 $sql = "INSERT INTO group_trips 
-    (trip_code, trip_name, event_type, description, vehicle_name, vehicle_type, vehicle_seats, vehicle_price,
-     departure_address, destination, departure_datetime, return_datetime, total_seats, price_per_person, public_trip)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+(trip_code, trip_name, event_type, description,
+ vehicle_name, vehicle_type, vehicle_seats, vehicle_price,
+ departure_address, destination, return_pickup, return_dropoff,
+ departure_datetime, return_datetime, total_seats, price_per_person, public_trip)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
@@ -63,44 +69,25 @@ if (!$stmt) {
     exit;
 }
 
-
-
 $stmt->bind_param(
-    "sssssss d s s s s i d i",
+    "ssssssidssssssidi",
     $trip_code,
     $trip_name,
     $event_type,
     $description,
     $vehicle_name,
     $vehicle_type,
-    $vehicle_seats,     
-    $vehicle_price,     
+    $vehicle_seats,       
+    $vehicle_price,        
     $departure_address,
     $destination,
+    $return_pickup,
+    $return_dropoff,
     $departure_datetime,
     $return_datetime,
-    $total_seats,       
-    $price_per_person, 
-    $public_trip        
-);
-
-$stmt->bind_param(
-    "sssssssds ss sd i",
-    $trip_code,
-    $trip_name,
-    $event_type,
-    $description,
-    $vehicle_name,
-    $vehicle_type,
-    $vehicle_seats,
-    $vehicle_price,
-    $departure_address,
-    $destination,
-    $departure_datetime,
-    $return_datetime,
-    $total_seats,
-    $price_per_person,
-    $public_trip
+    $total_seats,          
+    $price_per_person,    
+    $public_trip           
 );
 
 
@@ -114,7 +101,7 @@ $trip_id = $stmt->insert_id;
 $stmt->close();
 $conn->close();
 
-$join_url = "joinTrip.php?code=" . urlencode($trip_code);
+$join_url = "http://localhost/Campus-Cruiser-main/joinTrip.php?code=" . urlencode($trip_code);
 
 echo json_encode([
     "success" => true,

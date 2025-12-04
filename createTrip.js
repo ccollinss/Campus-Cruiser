@@ -25,15 +25,14 @@ function getUrlParams() {
         vehicleSeats: params.get('seats') || '5',
         vehiclePrice: params.get('price') || '45',
         vehicleFeatures: params.get('features') || 'Bluetooth,Backup Camera,USB',
-
         departureAddress: params.get('departure-address') || '',
         returnAddress: params.get('return-address') || '',
-
+        returnPickup: params.get('return-pickup') || '',
+        returnDropoff: params.get('return-dropoff') || '',
         departureDate: safeDate(params.get('departure-date')),
         departureTime: safeTime(params.get('departure-time')),
         returnDate: safeDate(params.get('return-date')),
         returnTime: safeTime(params.get('return-time')),
-
         totalSeats: params.get('total-seats') || '4'
     };
 }
@@ -145,6 +144,26 @@ function initializeForm() {
         document.getElementById('summary-destination').textContent = params.returnAddress;
     }
 
+    
+    const returnPickupValue =
+    params.returnPickup || 
+    params.returnAddress || 
+    params.departureAddress;
+
+    const returnDropoffValue =
+    params.returnDropoff || 
+    params.departureAddress || 
+    params.returnAddress;
+
+
+    document.getElementById('summary-return-pickup').textContent = returnPickupValue;
+    document.getElementById('summary-return-dropoff').textContent = returnDropoffValue;
+
+    document.getElementById('summary-return-pickup-section').style.display = "flex";
+    document.getElementById('summary-return-dropoff-section').style.display = "flex";
+
+    
+
     if (params.departureDate) {
         document.getElementById('summary-dep-date').textContent = formatDate(params.departureDate);
     }
@@ -203,10 +222,8 @@ function updateSidebar() {
         document.getElementById('summary-trip-type').textContent = f;
     }
 
-    if (params.vehicleName !== 'Toyota Camry') {
-        document.getElementById('summary-price').textContent =
-            `$${parseFloat(document.getElementById('price-per-person').value).toFixed(2)}`;
-    }
+    document.getElementById('summary-price').textContent =
+        `$${parseFloat(document.getElementById('price-per-person').value).toFixed(2)}`;
 
     document.getElementById('summary-seats').textContent =
         document.getElementById('total-seats').value;
@@ -233,30 +250,26 @@ document.getElementById('create-trip-form').addEventListener('submit', function 
     }
 
     const params = getUrlParams();
-    const hasVehicle = params.vehicleName !== 'Toyota Camry';
 
     const formData = {
         trip_name: document.getElementById('trip-name').value,
         event_type: eventTypeInput.value,
         description: document.getElementById('description').value,
-
         departure_date: params.departureDate,
         departure_time: params.departureTime,
         return_date: params.returnDate,
         return_time: params.returnTime,
-
         departure_address: params.departureAddress || "",
         destination: params.returnAddress || "",
-
-        total_seats: hasVehicle ? document.getElementById('total-seats').value : null,
-        price_per_person: hasVehicle ? document.getElementById('price-per-person').value : null,
-
+        return_pickup: params.returnPickup || params.returnAddress || params.departureAddress,
+        return_dropoff: params.returnDropoff || params.departureAddress || params.returnAddress,
+        total_seats: document.getElementById('total-seats').value,
+        price_per_person: document.getElementById('price-per-person').value,
         public_trip: document.getElementById('public-trip').checked ? "1" : "0",
-
-        vehicle_name: hasVehicle ? params.vehicleName : "",
-        vehicle_type: hasVehicle ? params.vehicleType : "",
-        vehicle_seats: hasVehicle ? params.vehicleSeats : "",
-        vehicle_price: hasVehicle ? params.vehiclePrice : ""
+        vehicle_name: params.vehicleName,
+        vehicle_type: params.vehicleType,
+        vehicle_seats: params.vehicleSeats,
+        vehicle_price: params.vehiclePrice
     };
 
 
