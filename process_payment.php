@@ -88,16 +88,17 @@ if (!$payment_stmt->execute()) {
 
 if ($is_group && $group_trip_id) {
 
+ */
+if ($is_group == "1" && !empty($group_trip_id)) {
+
     $member_sql = "
         INSERT INTO group_trip_members (group_trip_id, student_id, student_name)
         VALUES (?, ?, ?)
     ";
-
     $member_stmt = $conn->prepare($member_sql);
     if (!$member_stmt) {
         die("Member insert failed: " . $conn->error);
     }
-
     $member_stmt->bind_param("iss", $group_trip_id, $student_id, $student_name);
     $member_stmt->execute();
     $member_stmt->close();
@@ -107,95 +108,13 @@ if ($is_group && $group_trip_id) {
         SET seats_taken = seats_taken + 1
         WHERE id = ?
     ";
-
     $update_stmt = $conn->prepare($update_sql);
     if (!$update_stmt) {
         die("Seat update failed: " . $conn->error);
     }
-
     $update_stmt->bind_param("i", $group_trip_id);
     $update_stmt->execute();
     $update_stmt->close();
-}
-
-
-$payment_stmt->close();
-if (!empty($group_trip_id)) {
-
-    $member_sql = "
-        INSERT INTO group_trip_members (group_trip_id, student_id, student_name)
-        VALUES (?, ?, ?)
-    ";
-
-    $member_stmt = $conn->prepare($member_sql);
-
-    if ($member_stmt) {
-        $member_stmt->bind_param("iss", $group_trip_id, $student_id, $student_name);
-        $member_stmt->execute();
-        $member_stmt->close();
-    }
-
-    $update_sql = "
-        UPDATE group_trips
-        SET seats_taken = seats_taken + 1
-        WHERE id = ?
-    ";
-
-    $update_stmt = $conn->prepare($update_sql);
-
-    if ($update_stmt) {
-        $update_stmt->bind_param("i", $group_trip_id);
-        $update_stmt->execute();
-        $update_stmt->close();
-    }
-}
-
-
-if (!empty($group_trip_id)) {
-
-    $member_sql = "
-        INSERT INTO group_trip_members (group_trip_id, student_id, student_name)
-        VALUES (?, ?, ?)
-    ";
-
-    $member_stmt = $conn->prepare($member_sql);
-
-    if ($member_stmt) {
-        $member_stmt->bind_param("iss", $group_trip_id, $student_id, $student_name);
-        $member_stmt->execute();
-        $member_stmt->close();
-    }
-
-    $update_sql = "
-        UPDATE group_trips
-        SET seats_taken = seats_taken + 1
-        WHERE id = ?
-    ";
-
-    $update_stmt = $conn->prepare($update_sql);
-
-    if ($update_stmt) {
-        $update_stmt->bind_param("i", $group_trip_id);
-        $update_stmt->execute();
-        $update_stmt->close();
-    }
-}
-if (isset($_POST['group_trip_id']) && $_POST['is_group'] == "1") {
-    $group_trip_id = intval($_POST['group_trip_id']);
-
-    // Update seats_taken
-    $update_sql = "UPDATE group_trips SET seats_taken = seats_taken + 1 WHERE id = ?";
-    $update_stmt = $conn->prepare($update_sql);
-    $update_stmt->bind_param("i", $group_trip_id);
-    $update_stmt->execute();
-    $update_stmt->close();
-
-    // Insert member record
-    $member_sql = "INSERT INTO group_trip_members (group_trip_id, student_id, student_name) VALUES (?, ?, ?)";
-    $member_stmt = $conn->prepare($member_sql);
-    $member_stmt->bind_param("iss", $group_trip_id, $student_id, $student_name);
-    $member_stmt->execute();
-    $member_stmt->close();
 }
 
 
