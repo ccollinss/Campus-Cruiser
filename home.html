@@ -49,65 +49,86 @@
                 <button class="trip-tab active" id="round-trip-btn">Round Trip</button>
                 <button class="trip-tab" id="one-way-btn">One Way</button>
             </div>
+<!--search form-->
+<form id="search-form" method="GET" action="searchVehicle.html">
 
-            <!--search form-->
-            <form id="search-form" method="GET" action="searchVehicle.html">
+    <!--departure date-->
+    <div class="form-group" id="departure-date-group">
+        <label class="form-label">Departure Date <span class="required">*</span></label>
+        <input class="form-input" type="date" id="departure-date" name="departure-date" required
+            aria-label="Departure date">
+    </div>
 
-                <!--departure date-->
-                <div class="form-group" id="departure-date-group">
-                    <label class="form-label">Departure Date <span class="required">*</span></label>
-                    <input class="form-input" type="date" id="departure-date" name="departure-date" required
-                        aria-label="Departure date">
-                </div>
+    <!--departure time-->
+    <div class="form-group" id="departure-time-group">
+        <label class="form-label">Departure Time <span class="required">*</span></label>
+        <input class="form-input" type="time" id="departure-time" name="departure-time" required
+            aria-label="Departure time">
+    </div>
 
-                <!--departure time-->
-                <div class="form-group" id="departure-time-group">
-                    <label class="form-label">Departure Time <span class="required">*</span></label>
-                    <input class="form-input" type="time" id="departure-time" name="departure-time" required
-                        aria-label="Departure time">
-                </div>
+    <!--return date-->
+    <div class="form-group" id="return-date-group">
+        <label class="form-label">Return Date <span class="required">*</span></label>
+        <input class="form-input" type="date" id="return-date" name="return-date" required
+            aria-label="Return date">
+    </div>
 
-                <!---return date-->
-                <div class="form-group" id="return-date-group">
-                    <label class="form-label">Return Date <span class="required">*</span></label>
-                    <input class="form-input" type="date" id="return-date" name="return-date" required
-                        aria-label="Return date">
-                </div>
+    <!--return time-->
+    <div class="form-group" id="return-time-group">
+        <label class="form-label">Return Time <span class="required">*</span></label>
+        <input class="form-input" type="time" id="return-time" name="return-time" required
+            aria-label="Return time">
+    </div>
 
-                <!--return time-->
-                <div class="form-group" id="return-time-group">
-                    <label class="form-label">Return Time <span class="required">*</span></label>
-                    <input class="form-input" type="time" id="return-time" name="return-time" required
-                        aria-label="Return time">
-                </div>
+    <!--departure address -->
+    <div class="form-group-full-width" id="departure-address-group">
+        <label class="form-label">Leaving From <span class="required">*</span></label>
+        <input class="form-input" type="text" id="departure-address" name="departure-address" required
+            placeholder="e.g., VSU Multi-Purpose Center" aria-label="Departure address">
+    </div>
 
-                <!--departure address-->
-                <div class="form-group-full-width" id="departure-address-group">
-                    <label class="form-label">Departure Address <span class="required">*</span></label>
-                    <input class="form-input" type="text" id="departure-address" name="departure-address" required
-                        placeholder="e.g., VSU Multi-Purpose Center" aria-label="Departure address">
-                </div>
+    <!--return address -->
+    <div class="form-group-full-width" id="return-address-group">
+        <label class="form-label">Going To <span class="required">*</span></label>
+        <input class="form-input" type="text" id="return-address" name="return-address" required
+            placeholder="e.g., Richmond, VA" aria-label="Return address">
+    </div>
 
-                <!--return address-->
-                <div class="form-group-full-width" id="return-address-group">
-                    <label class="form-label">Return Address <span class="required">*</span></label>
-                    <input class="form-input" type="text" id="return-address" name="return-address" required
-                        placeholder="e.g., Richmond, VA" aria-label="Return address">
-                </div>
 
-                <!--seats-->
-                <div class="form-group-full-width" id="seats-group">
-                    <label class="form-label">Seats <span class="required">*</span></label>
-                    <input class="form-input" type="number" id="seats" name="seats" min="1" max="15" required
-                        aria-label="Number of seats">
-                </div>
+    <!--Return Pickup Location-->
+    <div class="form-group-full-width" id="return-pickup-group">
+        <label class="form-label">Return Pickup Location <small>(default: same as destination)</small></label>
+        <input class="form-input" type="text" id="return-pickup" name="return-pickup"
+            placeholder="If same as destination, leave blank">
+    </div>
 
-                <!--search buttons-->
-                <div class="form-buttons">
-                    <button type="submit" class="search-btn" aria-label="Search trips" href="searchVehicle.html">Search Vehicles</button>
-                    <button type="submit" class="trip-btn" id="create-trip-btn" aria-label="Create a trip">Create New Group Trip</button>
-                </div>
-            </form>
+    <!--Return Drop-off Location-->
+    <div class="form-group-full-width" id="return-dropoff-group">
+        <label class="form-label">Return Drop-off Location <small>(default: same as original pickup)</small></label>
+        <input class="form-input" type="text" id="return-dropoff" name="return-dropoff"
+            placeholder="If same as original pickup, leave blank">
+    </div>
+
+
+    <!--seats-->
+    <div class="form-group-full-width" id="seats-group">
+        <label class="form-label">Seats <span class="required">*</span></label>
+        <input class="form-input" type="number" id="seats" name="seats" min="1" max="15" required
+            aria-label="Number of seats">
+    </div>
+
+    <!--search buttons-->
+    <div class="form-buttons">
+        <button type="submit" class="search-btn" aria-label="Search trips" href="searchVehicle.html">
+            Search Vehicles
+        </button>
+        <button type="submit" class="trip-btn" id="create-trip-btn" aria-label="Create a trip">
+            Create New Group Trip
+        </button>
+    </div>
+
+</form>
+
         </section>
 
         <!--featured events-->
